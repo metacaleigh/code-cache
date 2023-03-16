@@ -7,11 +7,15 @@ function FoldersList({ folders }) {
     const [user, setUser] = useContext(UserContext)
 
     const folderCards = folders?.map((f) => {
-        return <FolderCard key={f.id} {...f} />
+        return (
+            <div className="grid grid-cols-4">
+                <FolderCard key={f.id} {...f} />
+            </div>
+        )
     })
     return(
         <>
-            <div className="grid grid-cols-4">
+            <div>
                 {folderCards}
             </div>
         </>

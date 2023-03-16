@@ -6,11 +6,13 @@ import LandingPage from './LandingPage';
 import MainNavBar from './MainNavBar';
 import FoldersPage from "./FoldersPage";
 import NewFolderForm from "./NewFolderForm";
+import ResourcesPage from "./ResourcesPage";
 
 function App() {
 
   const [user, setUser] = useContext(UserContext)
   const [folders, setFolders] = useState([])
+  const [errors, setErrors] = useState([])
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -29,7 +31,7 @@ function App() {
     setFolders([...folders, newFolder])
   }
 
-  if (!user) return <LandingPage/>
+  if (!user) return <LandingPage errors={errors} setErrors={setErrors}/>
 
   return (
     <> 
@@ -38,7 +40,10 @@ function App() {
         <FoldersPage folders={folders} />
       </Route>
       <Route path="/new-folder">
-        <NewFolderForm onFormSubmit={onFormSubmit}/>
+        <NewFolderForm setErrors={setErrors} onFormSubmit={onFormSubmit}/>
+      </Route>
+      <Route path="/folders/:id">
+        <ResourcesPage />
       </Route>
     </Switch>
     </>

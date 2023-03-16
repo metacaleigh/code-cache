@@ -42,10 +42,10 @@ function SignInForm({ setErrors }){
     <div class="card-body items-center text-center">
         <h2 class="card-title">Sign In Here:</h2>
         <form onSubmit={handleSubmit}>
-            <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" class="input input-bordered input-primary w-full max-w-xs" />
+            <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" class="input input-bordered input-primary w-full max-w-xs my-3" />
             <input value={password} onChange={(e) => setPassword(e.target.value)}type="text" placeholder="Password" class="input input-bordered input-primary w-full max-w-xs" />
         <div class="card-actions justify-center">
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary my-3">Login</button>
         </div>
         </form>
     </div>

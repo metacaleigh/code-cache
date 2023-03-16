@@ -1,10 +1,10 @@
 import React from "react";
 import SignInPage from "./SignInPage";
 
-function LandingPage({ }) {
+function LandingPage({ errors, setErrors }) {
     return(
         <div>
-            <SignInPage />
+            <SignInPage errors={errors} setErrors={setErrors}/>
         </div>
     )
 }

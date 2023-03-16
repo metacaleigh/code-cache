@@ -61,6 +61,37 @@ function NavBar() {
     </ul>
   </div>
   <div className="navbar-end">
+  <button className="btn btn-circle bg-secondary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+        </svg>
+      </button>
+      <button className="btn btn-circle bg-primary mx-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
     <LogOutButton handleLogOutClick={handleLogOutClick}/>
   </div>
 </div></> 
