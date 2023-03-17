@@ -6,6 +6,18 @@ Rails.application.routes.draw do
   resources :notes
   resources :resources
   resources :folders
+
+  resources :folders do
+    resources :notes, only: [:index, :show]
+  end
+
+  resources :folders do
+    resources :snippets, only: [:index, :show]
+  end
+
+  resources :folders do
+    resources :links, only: [:index, :show]
+  end
   # resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,6 +28,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  get '/folder/links', to: 'folders#get_links'
 
   get '*path',
       to: 'fallback#index',

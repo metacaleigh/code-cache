@@ -7,6 +7,9 @@ import MainNavBar from './MainNavBar';
 import FoldersPage from "./FoldersPage";
 import NewFolderForm from "./NewFolderForm";
 import ResourcesPage from "./ResourcesPage";
+// import NewLinkForm from './NewLinkForm';
+// import NewNoteForm from './NewNoteForm';
+// import NewSnippetForm from './NewSnippetForm';
 
 function App() {
 

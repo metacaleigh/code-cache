@@ -7,7 +7,11 @@ class FoldersController < ApplicationController
     end
 
     def show
-        render json: @folder.resources, status: :ok
+        render json: @folder, status: :ok
+    end
+
+    def get_links
+        render json: @folder.links, status: :ok
     end
 
     def create

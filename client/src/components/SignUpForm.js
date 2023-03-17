@@ -42,7 +42,7 @@ function SignUpForm({ setErrors }){
 
 
     return(
-        <div class="card w-96 bg-neutral text-neutral-content">
+        <div class="card w-96 bg-neutral-focus text-neutral-content shadow-2xl">
         <div class="card-body items-center text-center">
             <h2 class="card-title my-2">Sign Up Here:</h2>
             <form onSubmit={handleFormSubmit}>
