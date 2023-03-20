@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink, Route, Switch } from "react-router-dom";
+import { useParams, NavLink, Route, Switch, useRouteMatch } from "react-router-dom";
 import ResourcesNavBar from './ResourcesNavBar';
 import ResourcesList from './ResourcesList';
 import Loading from './Loading';
@@ -7,11 +7,13 @@ import NewLinkForm from './NewLinkForm';
 import NewNoteForm from './NewNoteForm';
 import NewSnippetForm from './NewSnippetForm';
 
-function ResourcesPage() {
+function ResourcesPage({  onLinkFormSubmit, onNoteFormSubmit, onResourceCreation, onSnippetFormSubmit, onLinkDelete }) {
 
     const {id} = useParams();
     console.log(id);
     const [folderContent, setFolderContent] = useState({})
+    const match = useRouteMatch()
+    const [editClicked, setEditClicked] = useState(false);
     // const [links, setLinks] = useState([])
     // const [notes, setNotes] = useState([])
     // const [snippets, setSnippets] = useState([])
@@ -26,22 +28,37 @@ function ResourcesPage() {
 
     console.log(folderContent);
     
-    if (!folderContent) return <Loading />
+    if (!folderContent) {
+      return <Loading />
+    } else {
     return(
         <>
-            <ResourcesNavBar/>
+            <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked}/>
+            <Switch>
+                <Route path={`${match.url}/new-link`}>
+                  <NewLinkForm onLinkFormSubmit={onLinkFormSubmit} folderId={id} 
+                   onResourceCreation={onResourceCreation}
+                  />
+                </Route>
+                <Route path={`${match.url}/new-note`}>
+                  <NewNoteForm onNoteFormSubmit={onNoteFormSubmit} onResourceCreation={onResourceCreation} folderId={id}/>
+                </Route>
+                <Route path={`${match.url}/new-snippet`}>
+                  <NewSnippetForm onSnippetFormSubmit={onSnippetFormSubmit} folderId={id} onResourceCreation={onResourceCreation}/>
+                </Route>
+                <Route path={`${match.url}`}>
             {folderContent.resources?.length === 0 ? 
                 <div className="hero min-h-screen bg-base-100">
             <div className="hero-content text-center">
               <div className="max-w-md">
                 <h1 className="text-5xl font-bold py-6">Hmm, it looks a little empty in here...</h1>
-                <NavLink to="/new-link">
+                <NavLink to={`/folders/${id}/new-link`}>
                 <button className="btn btn-primary mx-1">Add a Link</button>
                 </NavLink>
-                <NavLink to="/new-snippet">
+                <NavLink to={`/folders/${id}/new-snippet`}>
                 <button className="btn btn-secondary mx-1">Add a Code Snippet</button>
                 </NavLink>
-                <NavLink to="/new-note">
+                <NavLink to={`/folders/${id}/new-note`}>
                 <button className="btn btn-accent mx-1">Add a Note</button>
                 </NavLink>
               </div>
@@ -49,22 +66,14 @@ function ResourcesPage() {
           </div>
             :
             <>
-                <ResourcesList folderContent={folderContent}/>
+                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete}/>
             </>
             }
-                <Switch>
-                <Route path="/new-link">
-                  <NewLinkForm />
-                </Route>
-                <Route path="/new-note">
-                  <NewNoteForm />
-                </Route>
-                <Route path="/new-snippet">
-                  <NewSnippetForm />
-                </Route>
-                </Switch>
+              </Route>
+            </Switch>
         </>
     )
+          }
 }
 
 export default ResourcesPage;

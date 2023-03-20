@@ -2,11 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import LinkCard from './LinkCard';
 
-function LinksView({ links }){
+function LinksView({ links, editClicked, onLinkDelete }){
 
     const linkCards = links?.map((link) => {
         return (
-            <LinkCard key={link.id} {...link} />
+            <LinkCard key={link.id} {...link} editClicked={editClicked} onLinkDelete={onLinkDelete}/>
         )
     })
 

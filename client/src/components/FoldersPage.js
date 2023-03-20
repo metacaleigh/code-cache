@@ -3,7 +3,7 @@ import FoldersList from "./FoldersList";
 import MainNavBar from "./MainNavBar";
 import { UserContext } from "../context/user";
 
-function FoldersPage({ folders }) {
+function FoldersPage({ folders, onFolderDelete }) {
 
     const [user, setUser] = useContext(UserContext)
     const [editClicked, setEditClicked] = useState(false)
@@ -20,7 +20,7 @@ function FoldersPage({ folders }) {
           </div>
           <div>
             <div>
-              <FoldersList folders={folders} editClicked={editClicked}/>
+              <FoldersList folders={folders} editClicked={editClicked} onFolderDelete={onFolderDelete}/>
             </div>
           </div>
         </div>

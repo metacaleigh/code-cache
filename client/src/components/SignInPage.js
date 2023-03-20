@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import ErrorMsg from "./ErrorMsg";
+import CClogo from "../CClogo.png";
 
 function SignInPage({ errors, setErrors }) {
   const [showLogin, setShowLogin] = useState(true);
@@ -10,10 +11,12 @@ function SignInPage({ errors, setErrors }) {
   return (
     <>
       <div className="hero min-h-2/4">
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
+        <div className="hero-overlay bg-base-100 bg-opacity-60"></div>
+        <div className="hero-content text-center text-primary">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+            <h1 className="mb-5 text-5xl font-bold">Hello there!</h1>
+            {/* <h1 className="mb-5 text-5xl font-bold">Welcome to</h1> */}
+            {/* <img src={CClogo} alt="code/cache logo"/> */}
             <p className="mb-5">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
@@ -24,7 +27,7 @@ function SignInPage({ errors, setErrors }) {
         </div>
       </div>
       <div>
-        <div className="card-body items-center text-center text-neutral-content">
+        <div className="card-body items-center text-center text-gray-900">
           {showLogin ? (
             <>
               <SignInForm setErrors={setErrors} />

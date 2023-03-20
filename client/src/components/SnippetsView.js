@@ -1,9 +1,17 @@
 import React from 'react';
+import SnippetCard from './SnippetCard';
 
-function SnippetsView(){
+function SnippetsView({ snippets }){
+
+    const snippetCards = snippets?.map((snippet) => {
+        return <SnippetCard key={snippet.id} {...snippet} />
+    })
+
     return(
         <>
-            <h1>Snippets View</h1>
+            <div className="flex flex-row flex-wrap justify-around">
+                {snippetCards}
+            </div>
         </>
     )
 }

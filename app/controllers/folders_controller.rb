@@ -1,6 +1,6 @@
 class FoldersController < ApplicationController
     
-    before_action :set_folder, only: [:show]
+    before_action :set_folder, only: [:show, :update, :destroy]
 
     def index
         render json: @user.folders, status: :ok
@@ -17,6 +17,16 @@ class FoldersController < ApplicationController
     def create
         folder = Folder.create!(folder_params)
         render json: folder, status: :created
+    end
+
+    def update
+        @folder.update!(folder_params)
+        render json: @folder, status: :accepted
+    end
+
+    def destroy
+        @folder.destroy
+        head :no_content
     end
 
     private

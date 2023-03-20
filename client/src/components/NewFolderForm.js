@@ -50,11 +50,11 @@ function NewFolderForm({ onFormSubmit }) {
             <p className="py-6"> Create folders for languages, frameworks, projects, and more!
             </p>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
             <div className="card-body">
                 <div className="card-actions justify-end">
                 <button
-                  className="btn btn-square btn-sm"
+                  className="btn btn-square btn-sm bg-primary"
                   onClick={exitForm}
                 >
                   <svg
@@ -62,7 +62,7 @@ function NewFolderForm({ onFormSubmit }) {
                     className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="black"
                   >
                     <path
                       strokeLinecap="round"

@@ -1,6 +1,6 @@
 class Folder < ApplicationRecord
   # attr_accessor :user_id, :name, :description, :image_url
-  has_many :resources
+  has_many :resources, dependent: :destroy
   belongs_to :user
   has_many :notes, through: :resources, source: :resourceable, source_type: 'Note'
   has_many :links, through: :resources, source: :resourceable, source_type: 'Link'

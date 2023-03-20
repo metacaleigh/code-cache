@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import FolderCard from "./FolderCard";
 import { UserContext } from "../context/user";
 
-function FoldersList({ folders, editClicked }) {
+function FoldersList({ folders, editClicked, onFolderDelete }) {
 
     const [user, setUser] = useContext(UserContext)
 
-    const folderCards = folders?.map((f) => {
+    const folderCards = folders?.map((f, index) => {
         return (
-                <FolderCard key={f.id} {...f} editClicked={editClicked}/>
+                <FolderCard key={f.id} index={index} {...f} editClicked={editClicked} onFolderDelete={onFolderDelete}/>
         )
     })
     return(

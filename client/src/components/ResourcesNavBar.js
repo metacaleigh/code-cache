@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import CClogo from "../CClogo.png";
 import { useHistory } from "react-router-dom";
 
-function ResourcesNavBar() {
-  const [editClicked, setEditClicked] = useState(false);
+function ResourcesNavBar({ editClicked, setEditClicked }) {
+  // const [editClicked, setEditClicked] = useState(false);
 
   const history = useHistory();
 
@@ -34,7 +34,9 @@ function ResourcesNavBar() {
               className="input input-bordered"
             />
           </div>
-          <button className="btn btn-circle bg-secondary">
+          <div class="dropdown">
+          <button tabIndex="0" className="btn btn-circle bg-secondary">
+            {/* <label  class="btn m-1">Click</label> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -50,6 +52,12 @@ function ResourcesNavBar() {
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
           </button>
+          <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a>New Link</a></li>
+              <li><a>New Snippet</a></li>
+              <li><a>New Note</a></li>
+            </ul>
+          </div>
           <button
             className="btn btn-circle bg-primary"
             onClick={handleEditClick}
