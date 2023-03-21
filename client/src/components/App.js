@@ -15,10 +15,6 @@ function App() {
   const [user, setUser] = useContext(UserContext)
   const [folders, setFolders] = useState([])
   const [errors, setErrors] = useState([])
-  const [links, setLinks] = useState([])
-  const [resources, setResources] = useState([])
-  const [snippets, setSnippets] = useState([])
-  const [notes, setNotes] = useState([])
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -30,22 +26,6 @@ function App() {
     fetch("/folders")
       .then((r) => (r.json()))
       .then((folders) => setFolders(folders))
-
-    fetch("/links")
-      .then((r) => (r.json()))
-      .then((links) => setLinks(links))
-
-    fetch("/snippets")
-      .then((r) => (r.json()))
-      .then((snippets) => setSnippets(snippets))
-
-    fetch("/notes")
-    .then((r) => (r.json()))
-    .then((notes) => setNotes(notes))
-
-    fetch("/resources")
-      .then((r) => (r.json()))
-      .then((resources) => setResources(resources))
   }, [])
   // console.log(folders)
 
@@ -53,21 +33,21 @@ function App() {
     setFolders([...folders, newFolder])
   }
 
-  function onLinkFormSubmit(newLink) {
-    setLinks([...links, newLink])
-  }
+  // function onLinkFormSubmit(newLink) {
+  //   setLinks([...links, newLink])
+  // }
 
-  function onSnippetFormSubmit(newSnippet) {
-    setSnippets([...snippets, newSnippet])
-  }
+  // function onSnippetFormSubmit(newSnippet) {
+  //   setSnippets([...snippets, newSnippet])
+  // }
 
-  function onNoteFormSubmit(newNote) {
-    setNotes([...notes, newNote])
-  }
+  // function onNoteFormSubmit(newNote) {
+  //   setNotes([...notes, newNote])
+  // }
 
-  function onResourceCreation(newResource) {
-    setResources([...resources, newResource])
-  }
+  // function onResourceCreation(newResource) {
+  //   setResources([...resources, newResource])
+  // }
 
   function onFolderDelete(id) {
 
@@ -77,16 +57,6 @@ function App() {
       method: 'DELETE'
     })
     .then(setFolders(filteredFolders))
-  }
-
-  function onLinkDelete(id) {
-
-    const filteredLinks = links.filter(l => l.id !== id)
-
-    fetch(`/links/${id}`, {
-      method: 'DELETE'
-    })
-    .then(setLinks(filteredLinks))
   }
 
   function onEditFormSubmit(editedFolder) {
@@ -100,20 +70,6 @@ function App() {
     .then(r => r.json())
     .then((data) => setFolders(
       folders.map((f) => f.id !== data.id ? f : data)
-    ))
-  }
-
-  function onEditLinkSubmit(editedLink) {
-    fetch(`/links/${editedLink.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedLink)
-    })
-    .then(r => r.json())
-    .then((data) => setLinks(
-      links.map((l) => l.id !== data.id ? l : data)
     ))
   }
 
@@ -132,17 +88,11 @@ function App() {
         <EditFolderForm onEditFormSubmit={onEditFormSubmit}/>
       </Route>
       <Route path="/folders/:id">
-        <ResourcesPage 
-        onLinkFormSubmit={onLinkFormSubmit} 
-        onSnippetFormSubmit={onSnippetFormSubmit}
-        onNoteFormSubmit={onNoteFormSubmit}
-        onResourceCreation={onResourceCreation}
-        onLinkDelete={onLinkDelete}
-        />
+        <ResourcesPage />
       </Route>
-      <Route to="/links/:id/edit">
+      {/* <Route path="/links/:id/edit">
         <EditLinkForm onEditLinkSubmit={onEditLinkSubmit}/>
-      </Route>
+      </Route> */}
     </Switch>
     </>
 

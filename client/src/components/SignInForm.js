@@ -31,8 +31,8 @@ function SignInForm({ setErrors }){
       }
 
     return(
-    <div className="card w-96 bg-base-300 text-neutral-content shadow-2xl">
-    <div className="card-body items-center text-cente text-gray-900">
+    <div className="card w-96 bg-base-300 text-base-content shadow-2xl">
+    <div className="card-body items-center text-center text-base-content">
         <h2 className="card-title">User Login</h2>
         <form onSubmit={handleSubmit}>
             <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" className="input input-bordered input-primary w-full max-w-xs my-3" />

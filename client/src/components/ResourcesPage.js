@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, NavLink, Route, Switch, useRouteMatch } from "react-router-dom";
+import { useParams, NavLink, Route, Switch, useLocation, useRouteMatch, useHistory} from "react-router-dom";
 import ResourcesNavBar from './ResourcesNavBar';
 import ResourcesList from './ResourcesList';
 import Loading from './Loading';
@@ -7,33 +7,151 @@ import NewLinkForm from './NewLinkForm';
 import NewNoteForm from './NewNoteForm';
 import NewSnippetForm from './NewSnippetForm';
 
-function ResourcesPage({  onLinkFormSubmit, onNoteFormSubmit, onResourceCreation, onSnippetFormSubmit, onLinkDelete }) {
+function ResourcesPage({}) {
 
+    const location = useLocation()
     const {id} = useParams();
     console.log(id);
+    const history = useHistory()
     const [folderContent, setFolderContent] = useState({})
     const match = useRouteMatch()
     const [editClicked, setEditClicked] = useState(false);
-    // const [links, setLinks] = useState([])
-    // const [notes, setNotes] = useState([])
-    // const [snippets, setSnippets] = useState([])
+    const [showLinkEdit, setShowLinkEdit] = useState(false);
+    const [showNoteEdit, setShowNoteEdit] = useState(false);
+    const [showSnippetEdit, setShowSnippetEdit] = useState(false);
+    const [search, setSearch] = useState("")
+    // let folderId = folderContent.id
+    // console.log(folderId)
 
     useEffect(() => {
       fetch(`/folders/${id}`)
       .then(r => r.json())
       .then(f => {
         setFolderContent(f)
+        console.log("USE EFFECT", f)
       })
-    }, [])
+    }, [location])
 
-    console.log(folderContent);
+    // console.log(folderContent);
+
+    function onLinkFormSubmit(newLink) {
+      setFolderContent({...folderContent, links: [...folderContent.links, newLink]})
+      // history.push(`/folders/${id}/links`)
+    }
+
+    function onSnippetFormSubmit(newSnippet) {
+      setFolderContent({...folderContent, snippets: [...folderContent.snippets, newSnippet]})
+      // history.push(`/folders/${id}/snippets`)
+    }
+  
+    function onNoteFormSubmit(newNote) {
+      setFolderContent({...folderContent, notes: [...folderContent.notes, newNote]})
+      // history.push(`/folders/${id}/notes`)
+    }
+  
+    function onResourceCreation(newResource) {
+      setFolderContent({...folderContent, resources: [...folderContent.resources, newResource]})
+      history.push(`/folders/${id}`)
+    }
+
+    function onEditLinkSubmit(id, editedLink) {
+      fetch(`/links/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedLink)
+      })
+      .then(r => r.json())
+      .then((newLink) => {
+        setFolderContent({...folderContent, links: folderContent.links.map((link) => {
+          if (link.id === newLink.id) {
+            return newLink
+          } else {
+            return link
+          }
+        })})
+      })
+      setShowLinkEdit(!showLinkEdit)
+    }
+
+    function onEditNoteSubmit(id, editedNote) {
+      fetch(`/notes/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedNote)
+      })
+      .then(r => r.json())
+      .then((newNote) => {
+        setFolderContent({...folderContent, notes: folderContent.notes.map((note) => {
+          if (note.id === newNote.id) {
+            return newNote
+          } else {
+            return note
+          }
+        })})
+      })
+      setShowNoteEdit(!showNoteEdit)
+    }
+
+    function onEditSnippetSubmit(id, editedSnippet) {
+      fetch(`/snippets/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedSnippet)
+      })
+      .then(r => r.json())
+      .then((newSnippet) => {
+        setFolderContent({...folderContent, snippets: folderContent.snippets.map((snippet) => {
+          if (snippet.id === newSnippet.id) {
+            return newSnippet
+          } else {
+            return snippet
+          }
+        })})
+      })
+      setShowSnippetEdit(!showSnippetEdit)
+    }
+
+    function onLinkDelete(id) {
+
+      const filteredLinks = folderContent.links.filter(l => l.id !== id)
+  
+      fetch(`/links/${id}`, {
+        method: 'DELETE'
+      })
+      .then(setFolderContent({...folderContent, links: filteredLinks}))
+    }
+
+    function onNoteDelete(id) {
+
+      const filteredNotes = folderContent.notes.filter(n => n.id !== id)
+  
+      fetch(`/notes/${id}`, {
+        method: 'DELETE'
+      })
+      .then(setFolderContent({...folderContent, notes: filteredNotes}))
+    }
+
+    function onSnippetDelete(id) {
+
+      const filteredSnippets = folderContent.snippets.filter(s => s.id !== id)
+  
+      fetch(`/snippets/${id}`, {
+        method: 'DELETE'
+      })
+      .then(setFolderContent({...folderContent, snippets: filteredSnippets}))
+    }
     
     if (!folderContent) {
       return <Loading />
     } else {
     return(
         <>
-            <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked}/>
             <Switch>
                 <Route path={`${match.url}/new-link`}>
                   <NewLinkForm onLinkFormSubmit={onLinkFormSubmit} folderId={id} 
@@ -66,7 +184,8 @@ function ResourcesPage({  onLinkFormSubmit, onNoteFormSubmit, onResourceCreation
           </div>
             :
             <>
-                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete}/>
+                <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch}/>
+                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search}/>
             </>
             }
               </Route>

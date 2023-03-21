@@ -32,11 +32,13 @@ class FoldersController < ApplicationController
     private
 
     def folder_params
-        params.permit(:name, :description, :image_url, :user_id)
+        params.permit(:name, :description, :image_url, :user_id, :folder_color)
     end
 
     def set_folder
-        @folder = Folder.find(params[:id])
+        Folder.uncached do
+            @folder = Folder.find(params[:id])
+        end
     end
 
 end

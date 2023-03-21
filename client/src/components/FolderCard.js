@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 // import { FolderContext } from "../context/folder";
 
-function FolderCard({ index, id, name, description, image_url, editClicked, onFolderDelete }) {
+function FolderCard({ index, id, name, description, image_url, editClicked, onFolderDelete, folder_color }) {
   
   const history = useHistory()
   const [starClicked, setStarClicked] = useState(false)
@@ -15,57 +15,13 @@ function FolderCard({ index, id, name, description, image_url, editClicked, onFo
   function editFolder() {
     history.push(`/edit-folder/${id}`)
   }
-
-  // function assignCardColor() {
-  //   if (index === 1 || 6 || 11 || 16 || 21 || 26 || 31 || 36 || 41 || 46) {
-  //     setCardColor("card w-96 h-40 bg-primary text-gray-900 my-1")
-  //   } else if (index === 2 || 7 || 12 || 17 || 22 || 27 || 32 || 37 || 42 || 47) {
-  //     setCardColor("card w-96 h-40 bg-secondary text-gray-900 my-1")
-  //   } else if (index === 3 || 8 || 13 || 18 || 23 || 28 || 33 || 38 || 43 || 48) {
-  //     setCardColor("card w-96 h-40 bg-accent text-gray-900 my-1")
-  //   } else if (index === 4 || 9 || 14 || 19 || 24 || 29 || 34 || 39 || 44 || 49) {
-  //     setCardColor("card w-96 h-40 bg-warning text-gray-900 my-1")
-  //   } else if (index === 5 || 10 || 15 || 20 || 25 || 30 || 35 || 40 || 45 || 50) {
-  //     setCardColor("card w-96 h-40 bg-info text-gray-900 my-1")
-  //   } else {
-  //     setCardColor("card w-96 h-40 bg-primary text-gray-900 my-1")
-  //   }
-  // }
-
-  // function assignCardColor() {
-  //   if (index === 1 ) {
-  //     setCardColor("card w-96 h-40 bg-primary text-gray-900 my-1")
-  //   } else if (index === 2 ) {
-  //     setCardColor("card w-96 h-40 bg-secondary text-gray-900 my-1")
-  //   } else if (index === 3 ) {
-  //     setCardColor("card w-96 h-40 bg-accent text-gray-900 my-1")
-  //   } else if (index === 4) {
-  //     setCardColor("card w-96 h-40 bg-warning text-gray-900 my-1")
-  //   } else if (index === 5 ) {
-  //     setCardColor("card w-96 h-40 bg-info text-gray-900 my-1")
-  //   } else {
-  //     setCardColor("card w-96 h-40 bg-primary text-gray-900 my-1")
-  //   }
-  // }
-
-  // assignCardColor()
-
-  const folderClassNames = [
-    "card w-96 h-40 bg-primary text-gray-900 my-1",
-    "card w-96 h-40 bg-secondary text-gray-900 my-1",
-    "card w-96 h-40 bg-accent text-gray-900 my-1",
-    "card w-96 h-40 bg-warning text-gray-900 my-1",
-    "card w-96 h-40 bg-info text-gray-900 my-1",
-  ];
-
-  const folderColor =
-    folderClassNames[Math.floor(Math.random() * folderClassNames.length)];
-
+  
+  console.log(folder_color)
 
   return (
     <>
         {editClicked === true ? (
-          <div className={folderColor}>
+          <div className={`${folder_color}`}>
             <span className="card-actions justify-end">
             <div className="badge badge-default badge-outline gap-2 my-2"
             onClick={editFolder}>
@@ -84,7 +40,7 @@ function FolderCard({ index, id, name, description, image_url, editClicked, onFo
             </div>
           </div>
         ) : (
-          <div className={folderColor}>
+          <div className={`${folder_color}`}>
             <div className="card-body">
             <NavLink to={`/folders/${id}`}>
               <h2 className="card-title">{name}</h2>

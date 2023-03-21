@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CClogo from "../CClogo.png";
-import { useHistory } from "react-router-dom";
+import CClogo from "../CCwhitelogo.png";
+import { useHistory, NavLink } from "react-router-dom";
 
-function ResourcesNavBar({ editClicked, setEditClicked }) {
+function ResourcesNavBar({ editClicked, setEditClicked, folderId, search, setSearch }) {
   // const [editClicked, setEditClicked] = useState(false);
 
   const history = useHistory();
@@ -29,12 +29,15 @@ function ResourcesNavBar({ editClicked, setEditClicked }) {
         <div className="flex-none gap-2">
           <div className="form-control">
             <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Search"
               className="input input-bordered"
             />
           </div>
           <div class="dropdown">
+          <div className="tooltip tooltip-bottom" data-tip="New Resource">
           <button tabIndex="0" className="btn btn-circle bg-secondary">
             {/* <label  class="btn m-1">Click</label> */}
             <svg
@@ -52,12 +55,14 @@ function ResourcesNavBar({ editClicked, setEditClicked }) {
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
           </button>
+          </div>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a>New Link</a></li>
-              <li><a>New Snippet</a></li>
-              <li><a>New Note</a></li>
+              <li><NavLink to={`/folders/${folderId}/new-link`}><a>New Link</a></NavLink></li>
+              <li><NavLink to={`/folders/${folderId}/new-snippet`}><a>New Snippet</a></NavLink></li>
+              <li><NavLink to={`/folders/${folderId}/new-note`}><a>New Note</a></NavLink></li>
             </ul>
           </div>
+          <div className="tooltip tooltip-bottom" data-tip="Edit Resources">
           <button
             className="btn btn-circle bg-primary"
             onClick={handleEditClick}
@@ -93,23 +98,42 @@ function ResourcesNavBar({ editClicked, setEditClicked }) {
               </svg>
             )}
           </button>
-          {/* <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          </div>
+          <div className="dropdown dropdown-end">
+          <div className="tooltip tooltip-bottom" data-tip="More...">
+          <button tabIndex={0} className="btn btn-circle bg-accent mr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#000000"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="19" cy="12" r="1"></circle>
+              <circle cx="5" cy="12" r="1"></circle>
+            </svg>
+          </button>
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>Blog</a>
+            </li>
+            <li>
+              <a>About Us</a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+          </ul>
         </div>
-      </label>
-      <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
-      </ul>
-    </div> */}
         </div>
       </div>
     </>

@@ -6,7 +6,8 @@ function NewLinkForm({ onLinkFormSubmit, folderId, onResourceCreation }) {
   const initialLinkData = {
     link_name: "",
     link_url: "",
-    description: ""
+    description: "",
+    is_starred: false
   }
 
     const history = useHistory()
@@ -28,14 +29,14 @@ function NewLinkForm({ onLinkFormSubmit, folderId, onResourceCreation }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(linkFormData),
+        body: JSON.stringify({...linkFormData, is_starred: false}),
       }).then((r) => {
         if (r.ok) {
           r.json().then((newLink) => {
             onLinkFormSubmit(newLink);
             handleResourceCreation(newLink);
             setLinkFormData({});
-            // history.push(`folders/${folderId}/links`);
+            // history.push(`/folders/${folderId}/links`);
           });
         } else {
           r.json().then((err) => setErrors(err?.errors));
@@ -60,6 +61,7 @@ function NewLinkForm({ onLinkFormSubmit, folderId, onResourceCreation }) {
         if (r.ok) {
           r.json().then((newResource) => {
             onResourceCreation(newResource);
+            // history.push(`/folders/${folderId}/links`);
             // history.push("/");
           });
         } else {
@@ -76,7 +78,7 @@ function NewLinkForm({ onLinkFormSubmit, folderId, onResourceCreation }) {
             <div className="text-center lg:text-left">
               <h1 className="text-5xl font-bold text-center">Add a New Link</h1>
             </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
               <div className="card-body">
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-control">

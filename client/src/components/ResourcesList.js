@@ -5,7 +5,7 @@ import NotesView from "./NotesView";
 import { Route, useRouteMatch, NavLink, useLocation, useParams, Switch } from "react-router-dom";
 import Loading from "./Loading";
 
-function ResourcesList({ onLinkDelete, editClicked, folderContent: {id, name, links, notes, snippets} }) {
+function ResourcesList({ search, onSnippetDelete, onEditSnippetSubmit, showSnippetEdit, setShowSnippetEdit, onEditNoteSubmit, onNoteDelete, showNoteEdit, setShowNoteEdit, setShowLinkEdit, showLinkEdit, onLinkDelete, editClicked, onEditLinkSubmit, folderContent: {id, name, links, notes, snippets} }) {
 
     const location = useLocation()
     console.log(location)
@@ -13,10 +13,23 @@ function ResourcesList({ onLinkDelete, editClicked, folderContent: {id, name, li
     console.log(id)
     const match = useRouteMatch()
     const [tabClicked, setTabClicked] = useState(false)
-    // console.log(match)
-    // console.log("links", folderContent.links)
-    // console.log(folderContent.links)
-    // console.log(folderContent)
+
+    // function onNoteFormSubmit(newNote) {
+    //   // console.log([...folderContent.notes, newNote])
+    //   setFolderContent({...folderContent, notes: [...folderContent.notes, newNote]})
+    // }
+
+  const filteredLinks = links?.filter((link) => {
+    return link.link_name.toLowerCase().includes(search.toLowerCase())
+  })
+
+  const filteredSnippets = snippets?.filter((snippet) => {
+    return snippet.snippet_name.toLowerCase().includes(search.toLowerCase())
+  })
+
+  const filteredNotes = notes?.filter((note) => {
+    return note.note_name.toLowerCase().includes(search.toLowerCase())
+  })
 
   // if (!id) return <Loading/>
   return (
@@ -49,16 +62,16 @@ function ResourcesList({ onLinkDelete, editClicked, folderContent: {id, name, li
           {/* <!-- Page content here --> */}
           <Switch>
           <Route exact path={`${match.url}/links`}>
-                <LinksView links={links} editClicked={editClicked} onLinkDelete={onLinkDelete}/>
+                <LinksView links={filteredLinks} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit}/>
             </Route>
             <Route exact path={`${match.url}`}>
-                <LinksView links={links} editClicked={editClicked} onLinkDelete={onLinkDelete}/>
+                <LinksView links={filteredLinks} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit}/>
             </Route>
             <Route exact path={`${match.url}/snippets`}>
-                <SnippetsView snippets={snippets}/>
+                <SnippetsView snippets={filteredSnippets} editClicked={editClicked} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete}/>
             </Route>
             <Route exact path={`${match.url}/notes`}>
-                <NotesView notes={notes}/>
+                <NotesView notes={filteredNotes} editClicked={editClicked} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit}/>
             </Route>
           </Switch>
     </>

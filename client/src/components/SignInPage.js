@@ -27,7 +27,7 @@ function SignInPage({ errors, setErrors }) {
         </div>
       </div>
       <div>
-        <div className="card-body items-center text-center text-gray-900">
+        <div className="card-body items-center text-center text-base-content">
           {showLogin ? (
             <>
               <SignInForm setErrors={setErrors} />

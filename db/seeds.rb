@@ -15,21 +15,20 @@ Resource.destroy_all
 caleigh = User.create(first_name: "Caleigh", last_name: "Steill", email: "caleighsteill@outlook.com", username: "cmoney", password: "Password123", password_confirmation: "Password123")
 chris = User.create(first_name: "Chris", last_name: "Santander", email: "chris@elevow.com", username: "chris", password: "Password123", password_confirmation: "Password123")
 
-f1 = Folder.create(name: "Rails", user_id: caleigh.id, description: "Rails resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU")
-f2 = Folder.create(name: "React", user_id: caleigh.id, description: "React resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU")
-f3 = Folder.create(name: "JavaScript", user_id: caleigh.id, description: "JS resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU")
+f1 = Folder.create(name: "Rails", user_id: caleigh.id, description: "Rails resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-primary text-gray-900 my-1")
+f2 = Folder.create(name: "React", user_id: caleigh.id, description: "React resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-secondary text-gray-900 my-1")
+f3 = Folder.create(name: "JavaScript", user_id: caleigh.id, description: "JS resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-accent text-gray-900 my-1")
 
-l1 = Link.create(link_name: "Active Record Basics", description: "This guide will get you started with Active Record models and persistence to the database.", link_url: "https://guides.rubyonrails.org/active_record_basics.html")
-l2 = Link.create(link_name: "Active Record Validations", description: "This guide teaches you how to validate the state of objects before they go into the database, using Active Record's validations feature.", link_url: "https://guides.rubyonrails.org/active_record_validations.html")
-l3 = Link.create(link_name: "Active Record Associations", description: "This guide covers all the associations provided by Active Record.", link_url: "https://guides.rubyonrails.org/association_basics.html")
-l4 = Link.create(link_name: "Active Record Migrations", description: "
-Migrations are a feature of Active Record that allows you to evolve your database schema over time.", link_url: "https://guides.rubyonrails.org/active_record_migrations.html")
+l1 = Link.create(link_name: "Active Record Basics", description: "This guide will get you started with Active Record models and persistence to the database.", link_url: "https://guides.rubyonrails.org/active_record_basics.html", is_starred: true)
+l2 = Link.create(link_name: "Active Record Validations", description: "This guide teaches you how to validate the state of objects before they go into the database, using Active Record's validations feature.", link_url: "https://guides.rubyonrails.org/active_record_validations.html", is_starred: false)
+l3 = Link.create(link_name: "Active Record Associations", description: "This guide covers all the associations provided by Active Record.", link_url: "https://guides.rubyonrails.org/association_basics.html", is_starred: false)
+l4 = Link.create(link_name: "Active Record Migrations", description: "Migrations are a feature of Active Record that allows you to evolve your database schema over time.", link_url: "https://guides.rubyonrails.org/active_record_migrations.html", is_starred: true)
 
-s1 = Snippet.create(snippet_name: "Header", description: "Header syntax", snippet: "<h1>Header</h1>")
-s2 = Snippet.create(snippet_name: "Paragraph", description: "Paragraph syntax", snippet: "<p>Paragraph</p>")
+s1 = Snippet.create(snippet_name: "Header", description: "Header syntax", snippet: "<h1>Header</h1>", is_starred: false)
+s2 = Snippet.create(snippet_name: "Paragraph", description: "Paragraph syntax", snippet: "<p>Paragraph</p>",is_starred: true)
 
-n1 = Note.create(note_name: "Phase 3 Lecture Notes", note: "blah blah blah blah blah")
-n2 = Note.create(note_name: "Phase 5 Lecture Notes", note: "blah blah blah blah blah")
+n1 = Note.create(note_name: "Phase 3 Lecture Notes", note: "blah blah blah blah blah", is_starred: false)
+n2 = Note.create(note_name: "Phase 5 Lecture Notes", note: "blah blah blah blah blah", is_starred: true)
 
 Resource.create(folder_id: f1.id, resourceable_id: l1.id, resourceable_type: "Link")
 Resource.create(folder_id: f1.id, resourceable_id: l2.id, resourceable_type: "Link")

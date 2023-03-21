@@ -6,7 +6,8 @@ function NewSnippetForm({ onSnippetFormSubmit, folderId, onResourceCreation }) {
     const initialSnippetData = {
         snippet_name: "",
         description: "",
-        snippet: ""
+        snippet: "",
+        is_starred: false
     }
 
     const history = useHistory()
@@ -25,7 +26,7 @@ function NewSnippetForm({ onSnippetFormSubmit, folderId, onResourceCreation }) {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(snippetFormData),
+            body: JSON.stringify({...snippetFormData, is_starred: false}),
           }).then((r) => {
             if (r.ok) {
               r.json().then((newSnip) => {
@@ -73,7 +74,7 @@ function NewSnippetForm({ onSnippetFormSubmit, folderId, onResourceCreation }) {
               <h1 className="text-5xl font-bold text-center">Add a New</h1>
               <h1 className="text-5xl font-bold text-center">Code Snippet</h1>
             </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200">
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
               <div className="card-body">
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-control">
