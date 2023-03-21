@@ -33,22 +33,6 @@ function App() {
     setFolders([...folders, newFolder])
   }
 
-  // function onLinkFormSubmit(newLink) {
-  //   setLinks([...links, newLink])
-  // }
-
-  // function onSnippetFormSubmit(newSnippet) {
-  //   setSnippets([...snippets, newSnippet])
-  // }
-
-  // function onNoteFormSubmit(newNote) {
-  //   setNotes([...notes, newNote])
-  // }
-
-  // function onResourceCreation(newResource) {
-  //   setResources([...resources, newResource])
-  // }
-
   function onFolderDelete(id) {
 
     const filteredFolders = folders.filter(f => f.id !== id)

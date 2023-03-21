@@ -58,14 +58,13 @@ function EditSnippetForm({ snippet, onEditSnippetSubmit }) {
                     <label className="label">
                       <span className="label-text">Description:</span>
                     </label>
-                    <input
+                    <textarea
                       name="description"
                       value={snippetFormData.description}
                       onChange={handleEditFormChange}
-                      type="text"
-                      placeholder="Description"
-                      className="input input-bordered input-primary w-full max-w-xs"
-                    />
+                      placeholder="Description (Optional)"
+                      class="textarea textarea-bordered textarea-primary textarea-s w-full max-w-xs"
+                    ></textarea>
                   </div>
                   <div className="form-control">
                     <label className="label">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ErrorMsg from './ErrorMsg';
 
 function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
     
@@ -72,6 +73,7 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
             <div className="text-center lg:text-left">
               <h1 className="text-5xl font-bold text-center">Add a New Note</h1>
             </div>
+            <ErrorMsg errors={errors} />
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
               <div className="card-body">
                 <form onSubmit={handleFormSubmit}>

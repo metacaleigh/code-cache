@@ -11,7 +11,7 @@ function ResourcesPage({}) {
 
     const location = useLocation()
     const {id} = useParams();
-    console.log(id);
+    // console.log(id);
     const history = useHistory()
     const [folderContent, setFolderContent] = useState({})
     const match = useRouteMatch()
@@ -20,6 +20,7 @@ function ResourcesPage({}) {
     const [showNoteEdit, setShowNoteEdit] = useState(false);
     const [showSnippetEdit, setShowSnippetEdit] = useState(false);
     const [search, setSearch] = useState("")
+    const [starFilterOn, setStarFilterOn] = useState(false)
     // let folderId = folderContent.id
     // console.log(folderId)
 
@@ -28,7 +29,7 @@ function ResourcesPage({}) {
       .then(r => r.json())
       .then(f => {
         setFolderContent(f)
-        console.log("USE EFFECT", f)
+        // console.log("USE EFFECT", f)
       })
     }, [location])
 
@@ -36,17 +37,14 @@ function ResourcesPage({}) {
 
     function onLinkFormSubmit(newLink) {
       setFolderContent({...folderContent, links: [...folderContent.links, newLink]})
-      // history.push(`/folders/${id}/links`)
     }
 
     function onSnippetFormSubmit(newSnippet) {
       setFolderContent({...folderContent, snippets: [...folderContent.snippets, newSnippet]})
-      // history.push(`/folders/${id}/snippets`)
     }
   
     function onNoteFormSubmit(newNote) {
       setFolderContent({...folderContent, notes: [...folderContent.notes, newNote]})
-      // history.push(`/folders/${id}/notes`)
     }
   
     function onResourceCreation(newResource) {
@@ -184,8 +182,8 @@ function ResourcesPage({}) {
           </div>
             :
             <>
-                <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch}/>
-                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search}/>
+                <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch} starFilterOn={starFilterOn} setStarFilterOn={setStarFilterOn}/>
+                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search} starFilterOn={starFilterOn}/>
             </>
             }
               </Route>

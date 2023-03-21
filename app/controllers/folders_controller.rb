@@ -32,7 +32,7 @@ class FoldersController < ApplicationController
     private
 
     def folder_params
-        params.permit(:name, :description, :image_url, :user_id, :folder_color)
+        params.permit(:name, :description, :user_id, :folder_color)
     end
 
     def set_folder

@@ -15,9 +15,9 @@ Resource.destroy_all
 caleigh = User.create(first_name: "Caleigh", last_name: "Steill", email: "caleighsteill@outlook.com", username: "cmoney", password: "Password123", password_confirmation: "Password123")
 chris = User.create(first_name: "Chris", last_name: "Santander", email: "chris@elevow.com", username: "chris", password: "Password123", password_confirmation: "Password123")
 
-f1 = Folder.create(name: "Rails", user_id: caleigh.id, description: "Rails resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-primary text-gray-900 my-1")
-f2 = Folder.create(name: "React", user_id: caleigh.id, description: "React resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-secondary text-gray-900 my-1")
-f3 = Folder.create(name: "JavaScript", user_id: caleigh.id, description: "JS resources", image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_Gn_XA-yIJASlTbV8o1s6nU9cDEpglYiIQvl9rGEqmw_DE7JsO62PUHz2yXEQtKUdzTE&usqp=CAU", folder_color: "card w-96 h-40 bg-accent text-gray-900 my-1")
+f1 = Folder.create(name: "Rails", user_id: caleigh.id, description: "Rails resources", folder_color: "card w-96 bg-primary text-gray-900 my-1")
+f2 = Folder.create(name: "React", user_id: caleigh.id, description: "React resources", folder_color: "card w-96 bg-secondary text-gray-900 my-1")
+f3 = Folder.create(name: "JavaScript", user_id: caleigh.id, description: "JS resources", folder_color: "card w-96 bg-accent text-gray-900 my-1")
 
 l1 = Link.create(link_name: "Active Record Basics", description: "This guide will get you started with Active Record models and persistence to the database.", link_url: "https://guides.rubyonrails.org/active_record_basics.html", is_starred: true)
 l2 = Link.create(link_name: "Active Record Validations", description: "This guide teaches you how to validate the state of objects before they go into the database, using Active Record's validations feature.", link_url: "https://guides.rubyonrails.org/active_record_validations.html", is_starred: false)

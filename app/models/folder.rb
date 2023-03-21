@@ -5,4 +5,7 @@ class Folder < ApplicationRecord
   has_many :notes, through: :resources, source: :resourceable, source_type: 'Note'
   has_many :links, through: :resources, source: :resourceable, source_type: 'Link'
   has_many :snippets, through: :resources, source: :resourceable, source_type: 'Snippet'
+
+  validates :name, presence: true
+  validates :folder_color, presence: true
 end

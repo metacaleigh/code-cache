@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../context/user";
 import { ErrorContext } from "../context/error";
 import { useHistory } from "react-router-dom";
+import ErrorMsg from "./ErrorMsg";
 
 function NewFolderForm({ onFormSubmit }) {
   let history = useHistory();
@@ -22,21 +23,24 @@ function NewFolderForm({ onFormSubmit }) {
   const folderColors = [
     {
       color: "Pink",
-      className: "card w-96 h-40 bg-primary text-gray-900 my-1",
+      className: "card w-96 bg-primary text-gray-900 my-1",
     },
     {
       color: "Purple",
-      className: "card w-96 h-40 bg-secondary text-gray-900 my-1",
+      className: "card w-96 bg-secondary text-gray-900 my-1",
     },
     {
       color: "Orange",
-      className: "card w-96 h-40 bg-accent text-gray-900 my-1",
+      className: "card w-96 bg-accent text-gray-900 my-1",
     },
     {
       color: "Yellow",
-      className: "card w-96 h-40 bg-warning text-gray-900 my-1",
+      className: "card w-96 bg-warning text-gray-900 my-1",
     },
-    { color: "Blue", className: "card w-96 h-40 bg-info text-gray-900 my-1" },
+    { 
+    color: "Blue", 
+    className: "card w-96 bg-info text-gray-900 my-1" 
+    },
   ];
 
   function handleFormSubmit(e) {
@@ -72,6 +76,7 @@ function NewFolderForm({ onFormSubmit }) {
               Create folders for languages, frameworks, projects, and more!
             </p>
           </div>
+          <ErrorMsg errors={errors}/>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
             <div className="card-body">
               <div className="card-actions justify-end">
@@ -120,19 +125,6 @@ function NewFolderForm({ onFormSubmit }) {
                     placeholder="Description (Optional)"
                     class="textarea textarea-bordered textarea-primary textarea-s w-full max-w-xs"
                   ></textarea>
-                </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Image URL:</span>
-                  </label>
-                  <input
-                    name="image_url"
-                    value={formData.image_url}
-                    onChange={handleFormChange}
-                    type="text"
-                    placeholder="Image URL (Optional)"
-                    className="input input-bordered input-primary w-full max-w-xs"
-                  />
                 </div>
                 <div className="form-control">
                   <label className="label">

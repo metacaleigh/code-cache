@@ -1,5 +1,5 @@
 class FolderSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :image_url, :folder_color
+  attributes :id, :name, :description, :folder_color
   has_one :user
   has_many :resources
   has_many :notes, through: :resources
