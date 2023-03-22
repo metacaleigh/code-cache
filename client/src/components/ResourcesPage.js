@@ -19,8 +19,10 @@ function ResourcesPage({}) {
     const [showLinkEdit, setShowLinkEdit] = useState(false);
     const [showNoteEdit, setShowNoteEdit] = useState(false);
     const [showSnippetEdit, setShowSnippetEdit] = useState(false);
-    const [search, setSearch] = useState("")
-    const [starFilterOn, setStarFilterOn] = useState(false)
+    const [search, setSearch] = useState("");
+    const [starFilterOn, setStarFilterOn] = useState(false);
+    const [tagsClicked, setTagsClicked] = useState(false);
+    const [showAddTag, setShowAddTag] = useState(false);
     // let folderId = folderContent.id
     // console.log(folderId)
 
@@ -31,7 +33,7 @@ function ResourcesPage({}) {
         setFolderContent(f)
         // console.log("USE EFFECT", f)
       })
-    }, [location])
+    }, [location, starFilterOn])
 
     // console.log(folderContent);
 
@@ -115,6 +117,44 @@ function ResourcesPage({}) {
       setShowSnippetEdit(!showSnippetEdit)
     }
 
+  function onUnstar(id) {
+    fetch(`/links/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ is_starred: false }),
+    })
+    .then((unstar) => {
+      setFolderContent({...folderContent, links: folderContent.links.map((link) => {
+        if (link.id === unstar.id) {
+          return unstar
+        } else {
+          return link
+        }
+      })})
+    })
+  }
+
+  function onStar(id) {
+    fetch(`/links/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ is_starred: true }),
+    })
+    .then((star) => {
+      setFolderContent({...folderContent, links: folderContent.links.map((link) => {
+        if (link.id === star.id) {
+          return star
+        } else {
+          return link
+        }
+      })})
+    })
+  }
+
     function onLinkDelete(id) {
 
       const filteredLinks = folderContent.links.filter(l => l.id !== id)
@@ -182,8 +222,8 @@ function ResourcesPage({}) {
           </div>
             :
             <>
-                <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch} starFilterOn={starFilterOn} setStarFilterOn={setStarFilterOn}/>
-                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search} starFilterOn={starFilterOn}/>
+                <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch} starFilterOn={starFilterOn} setStarFilterOn={setStarFilterOn} tagsClicked={tagsClicked} setTagsClicked={setTagsClicked}/>
+                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search} starFilterOn={starFilterOn} tagsClicked={tagsClicked} onStar={onStar} onUnstar={onUnstar}/>
             </>
             }
               </Route>

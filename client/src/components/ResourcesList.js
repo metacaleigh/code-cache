@@ -28,6 +28,9 @@ function ResourcesList({
   editClicked,
   onEditLinkSubmit,
   starFilterOn,
+  tagsClicked,
+  onStar,
+  onUnstar,
   folderContent: { id, name, links, notes, snippets },
 }) {
   const location = useLocation();
@@ -84,6 +87,9 @@ function ResourcesList({
       <Switch>
         <Route exact path={`${match.url}/links`}>
           <LinksView
+            onStar={onStar}
+            onUnstar={onUnstar}
+            tagsClicked={tagsClicked}
             starFilterOn={starFilterOn}
             links={filteredLinks}
             editClicked={editClicked}
@@ -95,6 +101,9 @@ function ResourcesList({
         </Route>
         <Route exact path={`${match.url}`}>
           <LinksView
+            onStar={onStar}
+            onUnstar={onUnstar}
+            tagsClicked={tagsClicked}
             starFilterOn={starFilterOn}
             links={filteredLinks}
             editClicked={editClicked}

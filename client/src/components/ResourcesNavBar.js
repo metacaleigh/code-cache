@@ -10,6 +10,8 @@ function ResourcesNavBar({
   setSearch,
   starFilterOn,
   setStarFilterOn,
+  tagsClicked,
+  setTagsClicked
 }) {
   // const [editClicked, setEditClicked] = useState(false);
 
@@ -27,6 +29,10 @@ function ResourcesNavBar({
 
   function handleStarFilterClick() {
     setStarFilterOn(!starFilterOn);
+  }
+
+  function handleTagsClick() {
+    setTagsClicked(!tagsClicked)
   }
 
   return (
@@ -52,8 +58,25 @@ function ResourcesNavBar({
           </div>
           {location.pathname === `/folders/${folderId}` ||
           location.pathname === `/folders/${folderId}/links` ? (
+            <div className="dropdown">
             <div className="tooltip tooltip-bottom" data-tip="Manage Link Tags">
-              <button tabIndex="0" className="btn btn-circle bg-info">
+              <button onClick={handleTagsClick} tabIndex={0} className="btn btn-circle bg-info">
+                {tagsClicked === true ? 
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="#000000"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+                :
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -68,12 +91,18 @@ function ResourcesNavBar({
                   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                   <line x1="7" y1="7" x2="7.01" y2="7"></line>
                 </svg>
+}
               </button>
             </div>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+              <li><a>Manage Tags</a></li>
+              <li><a>Item 2</a></li>
+            </ul>
+          </div>
           ) : null}
           <div class="dropdown">
             <div className="tooltip tooltip-bottom" data-tip="New Resource">
-              <button tabIndex="0" className="btn btn-circle bg-secondary">
+              <button tabIndex={0} className="btn btn-circle bg-secondary">
                 {/* <label  class="btn m-1">Click</label> */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

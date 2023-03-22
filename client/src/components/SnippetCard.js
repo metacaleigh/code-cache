@@ -12,7 +12,7 @@ function SnippetCard({
   is_starred,
   id,
 }) {
-  const [starred, setStarred] = useState(is_starred);
+  const [snippetStarred, setSnippetStarred] = useState(is_starred);
   const [snippetClicked, setSnippetClicked] = useState(false)
 
   function handleSnippetClick() {
@@ -32,7 +32,7 @@ function SnippetCard({
       },
       body: JSON.stringify({ is_starred: false }),
     });
-    setStarred(false);
+    setSnippetStarred(false);
   }
 
   function handleStar() {
@@ -43,7 +43,7 @@ function SnippetCard({
       },
       body: JSON.stringify({ is_starred: true }),
     });
-    setStarred(true);
+    setSnippetStarred(true);
   }
 
   return (
@@ -112,7 +112,7 @@ function SnippetCard({
             </div>
             <div className="indicator">
               <div className="indicator-item indicator-bottom mr-7 mb-7">
-            {starred === true ? (
+            {snippetStarred === true ? (
               <div onClick={handleUnstar}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@ function SnippetCard({
           </div>
           <div className="indicator">
             <div className="indicator-item indicator-bottom mr-7 mb-7">
-          {starred === true ? (
+          {snippetStarred === true ? (
             <div onClick={handleUnstar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
