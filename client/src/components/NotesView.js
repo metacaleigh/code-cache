@@ -26,9 +26,11 @@ function NotesView({ editClicked, showNoteEdit, setShowNoteEdit, notes, onNoteDe
     return(
         <>
         { showNoteEdit && 
-            <EditNoteForm note={selectedNote} onEditNoteSubmit={onEditNoteSubmit}/>
+            <div className="flex flex-row justify-center">
+                <EditNoteForm note={selectedNote} onEditNoteSubmit={onEditNoteSubmit}/>
+            </div>
         }
-            <div className="flex flex-row flex-wrap justify-start mx-5 gap-5">
+            <div className="flex flex-row flex-wrap justify-start mx-5 gap-2">
                 {starFilterOn === true ? starredNoteCards : noteCards}
             </div>
         </>

@@ -117,43 +117,43 @@ function ResourcesPage({}) {
       setShowSnippetEdit(!showSnippetEdit)
     }
 
-  function onUnstar(id) {
-    fetch(`/links/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ is_starred: false }),
-    })
-    .then((unstar) => {
-      setFolderContent({...folderContent, links: folderContent.links.map((link) => {
-        if (link.id === unstar.id) {
-          return unstar
-        } else {
-          return link
-        }
-      })})
-    })
-  }
+  // function onUnstar(id) {
+  //   fetch(`/links/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ is_starred: false }),
+  //   })
+  //   .then((unstar) => {
+  //     setFolderContent({...folderContent, links: folderContent.links.map((link) => {
+  //       if (link.id === unstar.id) {
+  //         return unstar
+  //       } else {
+  //         return link
+  //       }
+  //     })})
+  //   })
+  // }
 
-  function onStar(id) {
-    fetch(`/links/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ is_starred: true }),
-    })
-    .then((star) => {
-      setFolderContent({...folderContent, links: folderContent.links.map((link) => {
-        if (link.id === star.id) {
-          return star
-        } else {
-          return link
-        }
-      })})
-    })
-  }
+  // function onStar(id) {
+  //   fetch(`/links/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ is_starred: true }),
+  //   })
+  //   .then((star) => {
+  //     setFolderContent({...folderContent, links: folderContent.links.map((link) => {
+  //       if (link.id === star.id) {
+  //         return star
+  //       } else {
+  //         return link
+  //       }
+  //     })})
+  //   })
+  // }
 
     function onLinkDelete(id) {
 
@@ -223,7 +223,7 @@ function ResourcesPage({}) {
             :
             <>
                 <ResourcesNavBar editClicked={editClicked} setEditClicked={setEditClicked} folderId={id} search={search} setSearch={setSearch} starFilterOn={starFilterOn} setStarFilterOn={setStarFilterOn} tagsClicked={tagsClicked} setTagsClicked={setTagsClicked}/>
-                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search} starFilterOn={starFilterOn} tagsClicked={tagsClicked} onStar={onStar} onUnstar={onUnstar}/>
+                <ResourcesList folderContent={folderContent} editClicked={editClicked} onLinkDelete={onLinkDelete} onEditLinkSubmit={onEditLinkSubmit} showLinkEdit={showLinkEdit} setShowLinkEdit={setShowLinkEdit} showNoteEdit={showNoteEdit} setShowNoteEdit={setShowNoteEdit} onNoteDelete={onNoteDelete} onEditNoteSubmit={onEditNoteSubmit} showSnippetEdit={showSnippetEdit} setShowSnippetEdit={setShowSnippetEdit} onEditSnippetSubmit={onEditSnippetSubmit} onSnippetDelete={onSnippetDelete} search={search} starFilterOn={starFilterOn} tagsClicked={tagsClicked}/>
             </>
             }
               </Route>

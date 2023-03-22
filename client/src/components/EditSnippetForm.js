@@ -33,12 +33,7 @@ function EditSnippetForm({ snippet, onEditSnippetSubmit }) {
     if (!snippetFormData) return null;
     return(
 <>
-        <div className="hero min-h-max bg-base-100 my-20">
-          <div className="hero-content flex-row lg:flex-col">
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl font-bold text-center">Edit Code Snippet</h1>
-            </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
+            <div className="card w-96 bg-base-300 shadow-xl mb-10">
               <div className="card-body">
                 <form onSubmit={handleEditFormSubmit}>
                   <div className="form-control">
@@ -86,8 +81,6 @@ function EditSnippetForm({ snippet, onEditSnippetSubmit }) {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
       </>
     )
 }

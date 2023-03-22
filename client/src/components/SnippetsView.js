@@ -28,7 +28,9 @@ function SnippetsView({ showSnippetEdit, setShowSnippetEdit, snippets, editClick
     return(
         <>
         {showSnippetEdit &&
+        <div className="flex flex-row justify-center">
         <EditSnippetForm snippet={selectedSnippet} onEditSnippetSubmit={onEditSnippetSubmit}/>
+        </div>
         }
             <div className="flex flex-row flex-wrap justify-start mx-5 gap-5">
                 {starFilterOn === true ? starredSnippetCards : snippetCards}

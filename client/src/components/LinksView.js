@@ -11,34 +11,12 @@ function LinksView({
   onLinkDelete,
   onEditLinkSubmit,
   starFilterOn,
-  tagsClicked,
-  onStar={onStar},
-  onUnstar={onUnstar}
+  tagsClicked
 }) {
 
     // const [linkStarred, setLinkStarred] = useState(is_starred); 
     const [linkId, setLinkId] = useState(null);
     const selectedLink = links?.find((link) => link.id === linkId); 
-
-//   function onUnstar(id) {
-//     fetch(`/links/${id}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ is_starred: false }),
-//     });
-//   }
-
-//   function onStar(id) {
-//     fetch(`/links/${id}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ is_starred: true }),
-//     });
-//   }
 
   const starredLinks = links?.filter((link) => {
     if (link?.is_starred === true) {
@@ -53,8 +31,6 @@ function LinksView({
     return (
       <LinkCard
         key={link.id}
-        onStar={onStar}
-        onUnstar={onUnstar}
         setLinkId={setLinkId}
         showLinkEdit={showLinkEdit}
         setShowLinkEdit={setShowLinkEdit}
@@ -70,8 +46,6 @@ function LinksView({
     return (
       <LinkCard
         key={link.id}
-        onStar={onStar}
-        onUnstar={onUnstar}
         setLinkId={setLinkId}
         showLinkEdit={showLinkEdit}
         setShowLinkEdit={setShowLinkEdit}
@@ -86,7 +60,9 @@ function LinksView({
   return (
     <>
       {showLinkEdit && (
+        <div className="flex flex-row justify-center">
         <EditLinkForm onEditLinkSubmit={onEditLinkSubmit} link={selectedLink} />
+        </div>
       )}
       <div className="flex flex-row flex-wrap justify-start ml-3 gap-3">
         {starFilterOn === true ? starredLinkCards : linkCards}
