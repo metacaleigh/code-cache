@@ -9,8 +9,11 @@ function FolderCard({
   name,
   description,
   editClicked,
-  onFolderDelete,
   folder_color,
+  showEditFolder, 
+  setShowEditFolder,
+  folderId, 
+  setFolderId
 }) {
   const history = useHistory();
   const [starClicked, setStarClicked] = useState(false);
@@ -20,7 +23,8 @@ function FolderCard({
   }
 
   function editFolder() {
-    history.push(`/edit-folder/${id}`);
+    setShowEditFolder(!showEditFolder)
+    setFolderId(id)
   }
 
   // console.log(folder_color);
@@ -29,10 +33,10 @@ function FolderCard({
     <>
       {editClicked === true ? (
         <div className={`${folder_color}`}>
-          <figure><img className="max-h-100" src={defImage} alt="Shoes" /></figure>
+          {/* <figure><img className="max-h-100" src={defImage} alt="Shoes" /></figure> */}
           <span className="card-actions justify-end">
             <div
-              className="badge badge-default badge-outline gap-2 my-2"
+              className="badge badge-default badge-outline gap-2 my-2 mx-2"
               onClick={editFolder}
             >
               <svg
@@ -50,28 +54,6 @@ function FolderCard({
               </svg>
               edit
             </div>
-            <div
-              className="badge badge-default badge-outline my-2 mr-2 gap-2"
-              onClick={() => onFolderDelete(id)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#000000"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                <line x1="10" y1="11" x2="10" y2="17"></line>
-                <line x1="14" y1="11" x2="14" y2="17"></line>
-              </svg>
-              delete
-            </div>
           </span>
           <div className="card-body">
             <h2 className="card-title">{name}</h2>
@@ -80,7 +62,7 @@ function FolderCard({
         </div>
       ) : (
         <div className={`${folder_color}`}>
-          <figure><img className="max-h-100" src={defImage} alt="Shoes" /></figure>
+          {/* <figure><img className="max-h-100" src={defImage} alt="Shoes" /></figure> */}
           <div className="card-body">
             <NavLink to={`/folders/${id}`}>
               <h2 className="card-title">{name}</h2>

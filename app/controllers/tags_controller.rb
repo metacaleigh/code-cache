@@ -7,13 +7,14 @@ class TagsController < ApplicationController
     end
 
     def create
-        tag = Tag.create!(tag_params)
+        tag = Tag.find_or_create_by!(tag_params)
         render json: tag, status: :created
     end
 
     def update
         @tag.update(tag_params)
         render json: tag, status: :accepted
+    end
 
     private
 

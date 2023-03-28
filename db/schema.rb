@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_184818) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_27_182439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "article"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "category"
+    t.date "date"
+  end
 
   create_table "folders", force: :cascade do |t|
     t.string "name"
@@ -58,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_184818) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_starred"
+    t.string "language"
   end
 
   create_table "taggables", force: :cascade do |t|

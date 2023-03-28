@@ -13,14 +13,11 @@ function SignInPage({ errors, setErrors }) {
         <div className="hero-overlay bg-base-100 bg-opacity-60"></div>
         <div className="hero-content text-center text-primary">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hi there!</h1>
-            <h1 className="mb-5 text-5xl font-bold">Welcome to</h1>
+            <h1 className="mb-5 text-5xl font-bold mt-12">Welcome to</h1>
             {/* <h1 className="mb-5 text-5xl font-bold">Welcome to</h1> */}
             <img src={CClogolarge} alt="code/cache logo"/>
             <p className="my-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              The go-to resource management tool for developers. Create custom folders to save links, notes, and code snippets, and retrieve them with ease when you need them, so you can kiss your countless open tabs goodbye!
             </p>
             {/* <button className="btn btn-primary">Get Started</button> */}
           </div>

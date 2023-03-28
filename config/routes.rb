@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :blogs, only: [:index, :show]
   resources :tags
   resources :taggables
   resources :snippets

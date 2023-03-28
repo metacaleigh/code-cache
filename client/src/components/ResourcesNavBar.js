@@ -11,7 +11,13 @@ function ResourcesNavBar({
   starFilterOn,
   setStarFilterOn,
   tagsClicked,
-  setTagsClicked
+  setTagsClicked,
+  showAddLink,
+  setShowAddLink,
+  showAddNote,
+  setShowAddNote,
+  showAddSnippet,
+  setShowAddSnippet
 }) {
   // const [editClicked, setEditClicked] = useState(false);
 
@@ -52,11 +58,11 @@ function ResourcesNavBar({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="text"
-              placeholder="Search"
-              className="input input-bordered"
+              placeholder="Search by Resource Name or Tag..."
+              className="input input-bordered w-80"
             />
           </div>
-          {location.pathname === `/folders/${folderId}` ||
+          {/* {location.pathname === `/folders/${folderId}` ||
           location.pathname === `/folders/${folderId}/links` ? (
             <div className="dropdown">
             <div className="tooltip tooltip-bottom" data-tip="Manage Link Tags">
@@ -99,7 +105,7 @@ function ResourcesNavBar({
               <li><a>Item 2</a></li>
             </ul>
           </div>
-          ) : null}
+          ) : null} */}
           <div class="dropdown">
             <div className="tooltip tooltip-bottom" data-tip="New Resource">
               <button tabIndex={0} className="btn btn-circle bg-secondary">
@@ -125,19 +131,19 @@ function ResourcesNavBar({
               class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <NavLink to={`/folders/${folderId}/new-link`}>
-                  <a>New Link</a>
-                </NavLink>
+                {/* <NavLink to={`/folders/${folderId}/new-link`}> */}
+                  <a onClick={() => setShowAddLink(!showAddLink)}>New Link</a>
+                {/* </NavLink> */}
               </li>
               <li>
-                <NavLink to={`/folders/${folderId}/new-snippet`}>
-                  <a>New Snippet</a>
-                </NavLink>
+                {/* <NavLink to={`/folders/${folderId}/new-snippet`}> */}
+                  <a onClick={() => setShowAddSnippet(!showAddSnippet)}>New Snippet</a>
+                {/* </NavLink> */}
               </li>
               <li>
-                <NavLink to={`/folders/${folderId}/new-note`}>
-                  <a>New Note</a>
-                </NavLink>
+                {/* <NavLink to={`/folders/${folderId}/new-note`}> */}
+                  <a onClick={() => setShowAddNote(!showAddNote)}>New Note</a>
+                {/* </NavLink> */}
               </li>
             </ul>
           </div>
@@ -240,7 +246,9 @@ function ResourcesNavBar({
               className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
+                <NavLink to="/blogs">
                 <a>Blog</a>
+                </NavLink>
               </li>
               <li>
                 <a>About Us</a>

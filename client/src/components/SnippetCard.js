@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 
 function SnippetCard({
   onSnippetDelete,
@@ -11,6 +12,8 @@ function SnippetCard({
   snippet,
   is_starred,
   id,
+  language,
+  tags
 }) {
   const [snippetStarred, setSnippetStarred] = useState(is_starred);
   const [snippetClicked, setSnippetClicked] = useState(false)
@@ -51,7 +54,7 @@ function SnippetCard({
       {editClicked === true ? (
         <div class="indicator">
           <div onClick={handleEditClick}>
-            <span class="indicator-item badge badge-gray-900 my-5 mx-10">
+            <span class="indicator-item badge badge-outline my-5 mx-10">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -68,48 +71,53 @@ function SnippetCard({
               Edit
             </span>
           </div>
-          <div onClick={() => onSnippetDelete(id)}>
-            <span class="indicator-item badge badge-gray-900 my-5 mx-28">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                <line x1="10" y1="11" x2="10" y2="17"></line>
-                <line x1="14" y1="11" x2="14" y2="17"></line>
-              </svg>
-              Delete
-            </span>
-          </div>
           <div className="flex h-75 overflow-y-scroll">
             <div onClick={handleSnippetClick} className="mockup-code bg-base-300 flex-shrink-0 text-primary">
               <div className="text font-medium text-base-content title-font text-center mb-5">
+                <div className="tooltip" data-tip="Click to Toggle Code/Description">
                 {snippet_name}
+                </div>
               </div>
-              <div className="mx-7">
+              <div className="mb-5 px-5">
               {snippetClicked === false ? 
-            <div className="w-min">
-            <pre>
-              <code>{snippet}</code>
-            </pre>
+            <div>
+              <CodeEditor 
+                disabled
+                data-color-mode="dark"
+                value={snippet}
+                language={language}
+                padding={15}
+                style={{
+                  fontSize: 14,
+                  backgroundColor: "#21222C",
+                  fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                }}
+              />
+            {tags?.length === 0 ? null :
+            <div className="card-actions justify-start mt-2">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            }
             </div>
             :
             <div className="w-min">
             <pre>
               <code>{description}</code>
             </pre>
+            {/* {tags?.length === 0 ? null :
+            <div className="card-actions justify-start mt-5">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            } */}
             </div>
               }
               </div>
             </div>
+            {/* {tags?.length === 0 ? null :
+            <div className="card-actions justify-start">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            } */}
             <div className="indicator">
               <div className="indicator-item indicator-bottom mr-7 mb-7">
             {snippetStarred === true ? (
@@ -151,22 +159,43 @@ function SnippetCard({
           </div>
       ) : (
         <div className="flex h-75 overflow-y-scroll">
-          <div onClick={handleSnippetClick} className="mockup-code bg-base-300 flex-shrink-0 text-primary p-5">
+          <div onClick={handleSnippetClick} className="mockup-code bg-base-300 flex-shrink-0 text-primary">
             <div className="text font-medium text-base-content title-font text-center mb-5">
+            <div className="tooltip" data-tip="Click to Toggle Code/Description">
               {snippet_name}
+              </div>
             </div>
-            <div className="mb-5">
+            <div className="mb-5 px-5">
               {snippetClicked === false ? 
-              <div className="w-min">
-                <pre>
-                  <code>{snippet}</code>
-                </pre>
+              <div>
+              <CodeEditor 
+                disabled
+                data-color-mode="dark"
+                value={snippet}
+                language={language}
+                padding={15}
+                style={{
+                  fontSize: 14,
+                  backgroundColor: "#21222C",
+                  fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                }}
+              />
+           {tags?.length === 0 ? null :
+            <div className="card-actions justify-start mt-2">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            }
               </div>
             :
             <div className="w-min">
             <pre>
               <code>{description}</code>
             </pre>
+            {/* {tags?.length === 0 ? null :
+            <div className="card-actions justify-start mt-5">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            } */}
             </div>
               }
             </div>

@@ -1,5 +1,6 @@
 class FoldersController < ApplicationController
     
+    before_action :authorize, only: [:index]
     before_action :set_folder, only: [:show, :update, :destroy]
 
     def index
@@ -7,7 +8,7 @@ class FoldersController < ApplicationController
     end
 
     def show
-        render json: @folder, status: :ok
+        render json: @folder, include: ["links", "links.tags", "notes", "notes.tags", "snippets", "snippets.tags"], status: :ok
     end
 
     def get_links

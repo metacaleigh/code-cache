@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ErrorMsg from './ErrorMsg';
 
-function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
+function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation, showAddNote, setShowAddNote }) {
     
     const initialNoteData = {
         note_name: "",
         note: "",
-        is_starred: false
+        is_starred: false,
+        tag_name: ""
     }
 
     const history = useHistory()
@@ -33,12 +34,13 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
                 onNoteFormSubmit(newNote);
                 handleResourceCreation(newNote);
                 setNoteFormData({});
-                history.push('/');
+                // history.push(`/folders/${folderId}/notes`);
               });
             } else {
               r.json().then((err) => setErrors(err?.errors));
             }
           });
+          setShowAddNote(!showAddNote)
     }
 
     function handleResourceCreation(newNote) {
@@ -68,13 +70,8 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
 
     return(
         <>
-        <div className="hero min-h-screen bg-base-100">
-          <div className="hero-content flex-row lg:flex-col">
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl font-bold text-center">Add a New Note</h1>
-            </div>
-            <ErrorMsg errors={errors} />
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
+            <div className="card w-96 bg-base-300 shadow-xl mb-10">
+            <h1 className="card-title mt-5 ml-36 text-neutral">New Note</h1>
               <div className="card-body">
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-control">
@@ -102,16 +99,34 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation }) {
                       class="textarea textarea-bordered textarea-primary textarea-s w-full max-w-xs"
                     ></textarea>
                   </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Add a Tag (up to 1):</span>
+                    </label>
+                    <input
+                      name="tag_name"
+                      value={noteFormData.tag_name}
+                      onChange={handleFormChange}
+                      type="text"
+                      placeholder="No spaces (i.e. #StackOverflow)"
+                      className="input input-bordered input-primary w-full max-w-xs"
+                    />
+                  </div>
                   <div className="form-control mt-6">
                     <button className="btn btn-primary" type="submit">
                       Submit
                     </button>
                   </div>
                 </form>
+                <a
+                className="link link-primary m"
+                onClick={() => setShowAddNote(!showAddNote)}
+              >
+                Cancel
+              </a>
               </div>
+              <ErrorMsg errors={errors} />
             </div>
-          </div>
-        </div>
       </>
     )
 }

@@ -1,5 +1,6 @@
 class Tag < ApplicationRecord
-# attr_accessor :tag_name
-belongs_to :taggable, polymorphic: true
 has_many :taggables
+
+validates :tag_name, format: { with: /\A#\w+/, message: 'must start with a #'}
+validates :tag_name, format: { without: /\s/, message: 'cannot contain spaces' }
 end

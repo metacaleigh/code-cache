@@ -8,6 +8,7 @@ class SnippetsController < ApplicationController
 
     def create
         snippet = Snippet.create!(snippets_params)
+        snippet.tags.find_or_create_by!(:tag_name => params[:tag_name])
         render json: snippet, status: :created
     end
 
@@ -24,7 +25,7 @@ class SnippetsController < ApplicationController
     private
 
     def snippets_params
-        params.permit(:snippet_name, :description, :snippet, :is_starred)
+        params.permit(:snippet_name, :description, :snippet, :is_starred, :language, :tags)
     end
 
     def set_snippet

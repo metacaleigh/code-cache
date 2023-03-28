@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import LinkCard from "./LinkCard";
 import EditLinkForm from "./EditLinkForm";
+import NewLinkForm from "./NewLinkForm";
 
 function LinksView({
   showLinkEdit,
@@ -11,12 +12,16 @@ function LinksView({
   onLinkDelete,
   onEditLinkSubmit,
   starFilterOn,
-  tagsClicked
+  tagsClicked,
+  showAddLink,
+  setShowAddLink,
+  onResourceCreation,
+  folderId,
+  onLinkFormSubmit,
 }) {
-
-    // const [linkStarred, setLinkStarred] = useState(is_starred); 
-    const [linkId, setLinkId] = useState(null);
-    const selectedLink = links?.find((link) => link.id === linkId); 
+  // const [linkStarred, setLinkStarred] = useState(is_starred);
+  const [linkId, setLinkId] = useState(null);
+  const selectedLink = links?.find((link) => link.id === linkId);
 
   const starredLinks = links?.filter((link) => {
     if (link?.is_starred === true) {
@@ -25,7 +30,6 @@ function LinksView({
       return null;
     }
   });
-
 
   const linkCards = links?.map((link) => {
     return (
@@ -61,10 +65,28 @@ function LinksView({
     <>
       {showLinkEdit && (
         <div className="flex flex-row justify-center">
-        <EditLinkForm onEditLinkSubmit={onEditLinkSubmit} link={selectedLink} />
+          <EditLinkForm
+            onEditLinkSubmit={onEditLinkSubmit}
+            link={selectedLink}
+            onLinkDelete={onLinkDelete}
+            linkId={linkId}
+            showLinkEdit={showLinkEdit}
+            setShowLinkEdit={setShowLinkEdit}
+          />
         </div>
       )}
-      <div className="flex flex-row flex-wrap justify-start ml-3 gap-3">
+      {showAddLink && (
+        <div className="flex flex-row justify-center">
+          <NewLinkForm
+            folderId={folderId}
+            onResourceCreation={onResourceCreation}
+            onLinkFormSubmit={onLinkFormSubmit}
+            setShowAddLink={setShowAddLink}
+            showAddLink={showAddLink}
+          />
+        </div>
+      )}
+      <div className="flex flex-row flex-wrap justify-center gap-x-3">
         {starFilterOn === true ? starredLinkCards : linkCards}
         {/* {linkCards} */}
       </div>

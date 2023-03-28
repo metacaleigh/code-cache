@@ -31,6 +31,17 @@ function ResourcesList({
   tagsClicked,
   onStar,
   onUnstar,
+  showAddLink,
+  setShowAddLink,
+  showAddNote,
+  setShowAddNote,
+  showAddSnippet,
+  setShowAddSnippet,
+  onResourceCreation,
+  folderId,
+  onLinkFormSubmit,
+  onNoteFormSubmit,
+  onSnippetFormSubmit,
   folderContent: { id, name, links, notes, snippets },
 }) {
   const location = useLocation();
@@ -41,15 +52,15 @@ function ResourcesList({
   const [tabClicked, setTabClicked] = useState(false);
 
   const filteredLinks = links?.filter((link) => {
-    return link.link_name.toLowerCase().includes(search.toLowerCase());
+    return link.link_name.toLowerCase().includes(search.toLowerCase()) || link?.tags[0]?.tag_name.toLowerCase().includes(search.toLowerCase());
   });
 
   const filteredSnippets = snippets?.filter((snippet) => {
-    return snippet.snippet_name.toLowerCase().includes(search.toLowerCase());
+    return snippet.snippet_name.toLowerCase().includes(search.toLowerCase()) || snippet?.tags[0]?.tag_name.toLowerCase().includes(search.toLowerCase());
   });
 
   const filteredNotes = notes?.filter((note) => {
-    return note.note_name.toLowerCase().includes(search.toLowerCase());
+    return note.note_name.toLowerCase().includes(search.toLowerCase()) || note?.tags[0]?.tag_name.toLowerCase().includes(search.toLowerCase());
   });
 
   // if (!id) return <Loading/>
@@ -97,6 +108,11 @@ function ResourcesList({
             onEditLinkSubmit={onEditLinkSubmit}
             showLinkEdit={showLinkEdit}
             setShowLinkEdit={setShowLinkEdit}
+            showAddLink={showAddLink}
+            setShowAddLink={setShowAddLink}
+            onLinkFormSubmit={onLinkFormSubmit}
+            folderId={id}
+            onResourceCreation={onResourceCreation}
           />
         </Route>
         <Route exact path={`${match.url}`}>
@@ -111,6 +127,11 @@ function ResourcesList({
             onEditLinkSubmit={onEditLinkSubmit}
             showLinkEdit={showLinkEdit}
             setShowLinkEdit={setShowLinkEdit}
+            showAddLink={showAddLink}
+            setShowAddLink={setShowAddLink}
+            onLinkFormSubmit={onLinkFormSubmit}
+            folderId={id}
+            onResourceCreation={onResourceCreation}
           />
         </Route>
         <Route exact path={`${match.url}/snippets`}>
@@ -122,6 +143,11 @@ function ResourcesList({
             onEditSnippetSubmit={onEditSnippetSubmit}
             onSnippetDelete={onSnippetDelete}
             starFilterOn={starFilterOn}
+            showAddSnippet={showAddSnippet}
+            setShowAddSnippet={setShowAddSnippet}
+            folderId={folderId}
+            onResourceCreation={onResourceCreation}
+            onSnippetFormSubmit={onSnippetFormSubmit}
           />
         </Route>
         <Route exact path={`${match.url}/notes`}>
@@ -133,6 +159,11 @@ function ResourcesList({
             onNoteDelete={onNoteDelete}
             onEditNoteSubmit={onEditNoteSubmit}
             starFilterOn={starFilterOn}
+            showAddNote={showAddNote}
+            setShowAddNote={setShowAddNote}
+            onNoteFormSubmit={onNoteFormSubmit}
+            folderId={folderId}
+            onResourceCreation={onResourceCreation}
           />
         </Route>
       </Switch>

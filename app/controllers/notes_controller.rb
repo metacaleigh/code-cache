@@ -8,6 +8,7 @@ class NotesController < ApplicationController
     
     def create
         note = Note.create!(note_params)
+        note.tags.find_or_create_by!(:tag_name => params[:tag_name])
         render json: note, status: :created
     end
 
@@ -24,7 +25,7 @@ class NotesController < ApplicationController
     private
 
     def note_params
-        params.permit(:note_name, :note, :is_starred)
+        params.permit(:note_name, :note, :is_starred, :tags)
     end 
 
     def set_note

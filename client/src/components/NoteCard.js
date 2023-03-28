@@ -10,6 +10,7 @@ function NoteCard({
   id,
   onNoteDelete,
   is_starred,
+  tags
 }) {
   const [starred, setStarred] = useState(is_starred);
 
@@ -45,7 +46,7 @@ function NoteCard({
       {editClicked === true ? (
         <div class="indicator">
           <div onClick={handleEditClick}>
-            <span class="indicator-item badge badge-neutral my-5 mx-10">
+            <span class="indicator-item badge badge-outline my-5 mx-10">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -62,31 +63,15 @@ function NoteCard({
               Edit
             </span>
           </div>
-          <div onClick={() => onNoteDelete(id)}>
-            <span class="indicator-item badge badge-neutral my-5 mx-28">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                <line x1="10" y1="11" x2="10" y2="17"></line>
-                <line x1="14" y1="11" x2="14" y2="17"></line>
-              </svg>
-              Delete
-            </span>
-          </div>
           <div className="card w-96 bg-base-300 shadow-xl">
             <div className="card-body">
               <h2 className="card-title">{note_name}</h2>
               <p>{note}</p>
+              {tags?.length === 0 ? null :
+              <div className="card-actions justify-start">
+                  <div className="badge">{tags[0]?.tag_name}</div>
+              </div>
+              }
               <div className="card-actions justify-end">
                 {starred === true ? (
                   <div onClick={handleUnstar}>
@@ -132,6 +117,11 @@ function NoteCard({
           <div className="card-body">
             <h2 className="card-title">{note_name}</h2>
             <p>{note}</p>
+            {tags?.length === 0 ? null :
+            <div className="card-actions justify-start">
+                <div className="badge">{tags[0]?.tag_name}</div>
+            </div>
+            }
             <div className="card-actions justify-end">
               {starred === true ? (
                 <div onClick={handleUnstar}>

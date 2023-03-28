@@ -12,11 +12,13 @@ class LinksController < ApplicationController
 
     def create
         new_link = Link.create!(link_params)
+        new_link.tags.find_or_create_by!(:tag_name => params[:tag_name])
         render json: new_link, status: :created
     end
 
     def update
         @link.update!(link_params)
+        @link.tags.find_or_create_by!(:tag_name => params[:tag_name])
         render json: @link, status: :accepted
     end
 
@@ -28,7 +30,7 @@ class LinksController < ApplicationController
     private
 
     def link_params
-        params.permit(:link_name, :description, :link_url, :is_starred)
+        params.permit(:link_name, :description, :link_url, :is_starred, :tags)
     end
 
     def set_link

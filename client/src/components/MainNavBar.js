@@ -4,7 +4,7 @@ import { UserContext } from "../context/user";
 import CCwhitelogo from "../CCwhitelogo.png";
 import { NavLink } from "react-router-dom";
 
-function NavBar({ editClicked, setEditClicked }) {
+function NavBar({ editClicked, setEditClicked, showAddFolder, setShowAddFolder }) {
   const [user, setUser] = useContext(UserContext);
 
   function handleLogOutClick() {
@@ -27,43 +27,6 @@ function NavBar({ editClicked, setEditClicked }) {
             <img src={CCwhitelogo} alt="code/cache logo" />
           </a>
         </div>
-        {/* <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>
-                <NavLink to="/new-folder">New Folder</NavLink>
-              </a>
-            </li>
-            <li>
-              <a>Favorites</a>
-            </li>
-            <li tabIndex={0}>
-              <a>
-                More
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <a>My Profile</a>
-                </li>
-                <li>
-                  <a>Blog</a>
-                </li>
-                <li>
-                  <a>About Us</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div> */}
         <div className="navbar-end">
           <div className="tooltip tooltip-bottom" data-tip="Edit Folder">
           <button
@@ -102,9 +65,8 @@ function NavBar({ editClicked, setEditClicked }) {
             )}
           </button>
           </div>
-          <NavLink to="/new-folder">
           <div className="tooltip tooltip-bottom" data-tip="Add New Folder">
-            <button className="btn btn-circle bg-primary mx-2">
+            <button onClick={() => setShowAddFolder(!showAddFolder)} className="btn btn-circle bg-primary mx-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -121,7 +83,6 @@ function NavBar({ editClicked, setEditClicked }) {
               </svg>
             </button>
             </div>
-          </NavLink>
           <div className="dropdown dropdown-end">
           <div className="tooltip tooltip-bottom" data-tip="More...">
           <button tabIndex={0} className="btn btn-circle bg-accent mr-2">
@@ -147,7 +108,11 @@ function NavBar({ editClicked, setEditClicked }) {
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Blog</a>
+                <a>
+                <NavLink to='/blogs'>
+                  Blog
+                </NavLink>
+                </a>               
             </li>
             <li>
               <a>About Us</a>

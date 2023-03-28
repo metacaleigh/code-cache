@@ -4,7 +4,7 @@ import { ErrorContext } from "../context/error";
 import { useHistory } from "react-router-dom";
 import ErrorMsg from "./ErrorMsg";
 
-function NewFolderForm({ onFormSubmit }) {
+function NewFolderForm({ onFormSubmit, showAddFolder, setShowAddFolder }) {
   let history = useHistory();
 
   function exitForm() {
@@ -23,23 +23,23 @@ function NewFolderForm({ onFormSubmit }) {
   const folderColors = [
     {
       color: "Pink",
-      className: "card w-96 bg-primary text-gray-900 my-1",
+      className: "card w-96 h-40 bg-primary text-gray-900 my-1",
     },
     {
       color: "Purple",
-      className: "card w-96 bg-secondary text-gray-900 my-1",
+      className: "card w-96 h-40 bg-secondary text-gray-900 my-1",
     },
     {
       color: "Orange",
-      className: "card w-96 bg-accent text-gray-900 my-1",
+      className: "card w-96 h-40 bg-accent text-gray-900 my-1",
     },
     {
       color: "Yellow",
-      className: "card w-96 bg-warning text-gray-900 my-1",
+      className: "card w-96 h-40 bg-warning text-gray-900 my-1",
     },
     { 
     color: "Blue", 
-    className: "card w-96 bg-info text-gray-900 my-1" 
+    className: "card w-96 h-40 bg-info text-gray-900 my-1" 
     },
   ];
 
@@ -67,39 +67,9 @@ function NewFolderForm({ onFormSubmit }) {
 
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-row lg:flex-col">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Create a New Folder</h1>
-            <p className="py-6">
-              {" "}
-              Create folders for languages, frameworks, projects, and more!
-            </p>
-          </div>
-          <ErrorMsg errors={errors}/>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-300">
+          <div className="card w-96 bg-base-300 shadow-xl mb-10">
+          <h1 className="card-title mt-5 ml-36">New Folder</h1>
             <div className="card-body">
-              <div className="card-actions justify-end">
-                <button
-                  className="btn btn-square btn-sm bg-primary"
-                  onClick={exitForm}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="black"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
               <form onSubmit={handleFormSubmit}>
                 <div className="form-control">
                   <label className="label">
@@ -154,10 +124,15 @@ function NewFolderForm({ onFormSubmit }) {
                   </button>
                 </div>
               </form>
+              <a
+            className="link link-primary m"
+            onClick={() => setShowAddFolder(!showAddFolder)}
+          >
+            Cancel
+          </a>
             </div>
+            <ErrorMsg errors={errors}/>
           </div>
-        </div>
-      </div>
     </>
   );
 }
