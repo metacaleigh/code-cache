@@ -14,7 +14,9 @@ function EditLinkForm({ note, onEditNoteSubmit, onNoteDelete, showNoteEdit, setS
     useEffect(() => {
         setNoteFormData({
             note_name: note.note_name,
-            note: note.note
+            note: note.note,
+            tag_name: note.tags[0].tag_name,
+            tag_id: note.tags[0].id
         })
     }, [])
 

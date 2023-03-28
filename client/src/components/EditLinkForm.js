@@ -16,8 +16,9 @@ function EditLinkForm({ link, onEditLinkSubmit, onLinkDelete, showLinkEdit, setS
         setLinkFormData({
             link_name: link.link_name,
             link_url: link.link_url,
-            description: link.description
-            // tag_name: link.tags[0].tag_name
+            description: link.description,
+            tag_name: link.tags[0].tag_name,
+            tag_id: link.tags[0].id
         })
     }, [])
 

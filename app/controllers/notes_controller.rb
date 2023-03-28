@@ -14,6 +14,8 @@ class NotesController < ApplicationController
 
     def update
         @note.update!(note_params)
+        tag = Tag.find_by(id: params[:tag_id])
+        tag.update!(tag_name: params[:tag_name])
         render json: @note, status: :accepted
     end
 

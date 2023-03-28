@@ -18,7 +18,8 @@ class LinksController < ApplicationController
 
     def update
         @link.update!(link_params)
-        @link.tags.find_or_create_by!(:tag_name => params[:tag_name])
+        tag = Tag.find_by(id: params[:tag_id])
+        tag.update!(tag_name: params[:tag_name])
         render json: @link, status: :accepted
     end
 

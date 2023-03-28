@@ -14,6 +14,8 @@ class SnippetsController < ApplicationController
 
     def update
         @snippet.update!(snippets_params)
+        tag = Tag.find_by(id: params[:tag_id])
+        tag.update!(tag_name: params[:tag_name])
         render json: @snippet, status: :accepted
     end
 

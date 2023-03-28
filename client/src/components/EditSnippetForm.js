@@ -17,7 +17,9 @@ function EditSnippetForm({ snippet, onEditSnippetSubmit, onSnippetDelete, showSn
     setSnippetFormData({
       snippet_name: snippet.snippet_name,
       description: snippet.description,
-      snippet: snippet.snippet
+      snippet: snippet.snippet,
+      tag_name: snippet.tags[0].tag_name,
+      tag_id: snippet.tags[0].id
     });
   }, []);
 
