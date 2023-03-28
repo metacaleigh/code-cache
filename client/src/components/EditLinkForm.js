@@ -106,7 +106,7 @@ function EditLinkForm({ link, onEditLinkSubmit, onLinkDelete, showLinkEdit, setS
                       class="textarea textarea-bordered textarea-primary textarea-s w-full max-w-xs"
                     ></textarea>
                   </div>
-                  {/* <div className="form-control">
+                  <div className="form-control">
                     <label className="label">
                       <span className="label-text">Tag (up to 1):</span>
                     </label>
@@ -118,7 +118,7 @@ function EditLinkForm({ link, onEditLinkSubmit, onLinkDelete, showLinkEdit, setS
                       placeholder="No spaces (i.e. #StackOverflow)"
                       className="input input-bordered input-primary w-full max-w-xs"
                     />
-                  </div> */}
+                  </div>
                   <div className="form-control mt-6">
                     <button className="btn btn-primary" type="submit">
                       Submit

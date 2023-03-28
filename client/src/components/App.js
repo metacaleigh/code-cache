@@ -9,6 +9,7 @@ import ResourcesPage from "./ResourcesPage";
 import Loading from './Loading';
 import BlogsPage from './BlogsPage';
 import BlogShow from './BlogShow';
+import AboutUs from './AboutUs';
 
 function App() {
 
@@ -42,9 +43,9 @@ function App() {
       <Route path="/blogs">
         <BlogsPage />
       </Route>
-      {/* <Route path="/blogs/:id">
-        <BlogShow />
-      </Route> */}
+      <Route path="/about-us">
+        <AboutUs />
+      </Route>
     </Switch>
     </>
 

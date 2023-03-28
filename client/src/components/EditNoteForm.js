@@ -88,6 +88,19 @@ function EditLinkForm({ note, onEditNoteSubmit, onNoteDelete, showNoteEdit, setS
                       class="textarea textarea-bordered textarea-primary textarea-s w-full max-w-xs"
                     ></textarea>
                   </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Tag (up to 1):</span>
+                    </label>
+                    <input
+                      name="tag_name"
+                      value={noteFormData.tag_name}
+                      onChange={handleEditFormChange}
+                      type="text"
+                      placeholder="No spaces (i.e. #StackOverflow)"
+                      className="input input-bordered input-primary w-full max-w-xs"
+                    />
+                  </div>
                   <div className="form-control mt-6">
                     <button className="btn btn-primary" type="submit">
                       Submit

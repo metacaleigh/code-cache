@@ -251,11 +251,13 @@ function ResourcesNavBar({
                 </NavLink>
               </li>
               <li>
+              <NavLink to="/about-us">
                 <a>About Us</a>
+              </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <a>Settings</a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

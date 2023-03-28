@@ -108,18 +108,20 @@ function NavBar({ editClicked, setEditClicked, showAddFolder, setShowAddFolder }
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-                <a>
                 <NavLink to='/blogs'>
+                <a>
                   Blog
-                </NavLink>
-                </a>               
+                </a>  
+                </NavLink>             
             </li>
             <li>
+              <NavLink to="/about-us">
               <a>About Us</a>
+              </NavLink>
             </li>
-            <li>
+            {/* <li>
               <a>Settings</a>
-            </li>
+            </li> */}
           </ul>
         </div>
         </div>
