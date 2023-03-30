@@ -28,7 +28,7 @@ function App() {
 
   if (!user) return <LandingPage errors={errors} setErrors={setErrors}/>
 
-  console.log(user)
+  // console.log(user)
 
   // if (user.folders !== folders) return <Loading />
   return (

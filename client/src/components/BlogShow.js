@@ -12,7 +12,7 @@ function BlogShow() {
         .then((a) => setArticle(a))
     }, [])
 
-    console.log(article)
+    // console.log(article)
 
     let cat = article?.category?.toUpperCase()
 
