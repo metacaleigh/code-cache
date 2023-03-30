@@ -45,7 +45,7 @@ function ResourcesPage({}) {
       });
   }, [location, starFilterOn]);
 
-  console.log(folderContent);
+  // console.log(folderContent);
 
   function onLinkFormSubmit(newLink) {
     setFolderContent({
@@ -195,13 +195,14 @@ function ResourcesPage({}) {
       method: "DELETE",
     }).then(setFolderContent({ ...folderContent, snippets: filteredSnippets }));
   }
+  // console.log("!!!", folderContent?.resources?.length)
 
   if (!folderContent) {
     return <Loading />;
   } else {
     return (
       <>
-        {folderContent.resources?.length === 0 ? (
+        {folderContent?.resources?.length === 0 ? (
           <div className="hero min-h-screen bg-base-100">
             <div className="hero-content text-center">
               <div className="max-w-md">

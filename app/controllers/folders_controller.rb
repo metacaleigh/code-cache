@@ -8,7 +8,7 @@ class FoldersController < ApplicationController
     end
 
     def show
-        render json: @folder, include: ["links", "links.tags", "notes", "notes.tags", "snippets", "snippets.tags"], status: :ok
+        render json: @folder, include: ["links", "links.tags", "notes", "notes.tags", "snippets", "snippets.tags", "resources", "resources"], status: :ok
     end
 
     def get_links

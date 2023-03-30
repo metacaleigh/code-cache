@@ -100,24 +100,12 @@ function SnippetCard({
             }
             </div>
             :
-            <div className="w-min">
-            <pre>
-              <code>{description}</code>
-            </pre>
-            {/* {tags?.length === 0 ? null :
-            <div className="card-actions justify-start mt-5">
-                <div className="badge">{tags[0]?.tag_name}</div>
-            </div>
-            } */}
+            <div className="flex flex-col max-w-3/5 text-center">
+              <p className="break-all max-w-xs mb-3">{description}</p>
             </div>
               }
               </div>
             </div>
-            {/* {tags?.length === 0 ? null :
-            <div className="card-actions justify-start">
-                <div className="badge">{tags[0]?.tag_name}</div>
-            </div>
-            } */}
             <div className="indicator">
               <div className="indicator-item indicator-bottom mr-7 mb-7">
             {snippetStarred === true ? (
@@ -187,15 +175,8 @@ function SnippetCard({
             }
               </div>
             :
-            <div className="w-min">
-            <pre>
-              <code>{description}</code>
-            </pre>
-            {/* {tags?.length === 0 ? null :
-            <div className="card-actions justify-start mt-5">
-                <div className="badge">{tags[0]?.tag_name}</div>
-            </div>
-            } */}
+            <div className="flex flex-col max-w-3/5 text-center">
+              <p className="break-all max-w-xs mb-3">{description}</p>
             </div>
               }
             </div>
