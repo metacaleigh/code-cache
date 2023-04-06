@@ -7,7 +7,7 @@ function NewLinkForm({
   folderId,
   onResourceCreation,
   showAddLink,
-  setShowAddLink,
+  setShowAddLink
 }) {
   const initialLinkData = {
     link_name: "",
@@ -30,7 +30,7 @@ function NewLinkForm({
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log("CONSOLE LOG - HANDLE FORM SUBMIT");
+    // console.log("CONSOLE LOG - HANDLE FORM SUBMIT");
     fetch("/links", {
       method: "POST",
       headers: {
@@ -43,14 +43,16 @@ function NewLinkForm({
           onLinkFormSubmit(newLink);
           handleResourceCreation(newLink);
           setLinkFormData({});
+          setShowAddLink(!showAddLink);
           // history.push(`/folders/${folderId}/links`);
         });
       } else {
         r.json().then((err) => setErrors(err?.errors));
+        // r.json().then((err) => resErrorMsg(err?.errors));
       }
     });
-    setShowAddLink(!showAddLink);
   }
+  console.log(errors)
 
   function handleResourceCreation(newLink) {
     const newResourceBody = {
@@ -73,10 +75,11 @@ function NewLinkForm({
           // history.push("/");
         });
       } else {
-        r.json().then((err) => setErrors(err?.errors));
+        // r.json().then((err) => console.log(err?.errors));
       }
     });
   }
+  console.log("component mounting")
 
   return (
     <>
@@ -124,14 +127,14 @@ function NewLinkForm({
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Add a Tag (up to 1):</span>
+                <span className="label-text">Add a Tag:</span>
               </label>
               <input
                 name="tag_name"
                 value={linkFormData.tag_name}
                 onChange={handleFormChange}
                 type="text"
-                placeholder="No spaces (i.e. #StackOverflow)"
+                placeholder="Must start w/ #, no spaces (i.e. #MDN)"
                 className="input input-bordered input-primary w-full max-w-xs"
               />
             </div>

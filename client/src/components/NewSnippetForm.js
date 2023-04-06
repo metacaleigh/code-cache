@@ -45,13 +45,13 @@ function NewSnippetForm({
           onSnippetFormSubmit(newSnip);
           handleResourceCreation(newSnip);
           setSnippetFormData({});
+          setShowAddSnippet(!showAddSnippet);
           // history.push(`/folders/${folderId}/snippets`);
         });
       } else {
         r.json().then((err) => setErrors(err?.errors));
       }
     });
-    setShowAddSnippet(!showAddSnippet);
   }
 
   function handleResourceCreation(newSnippet) {

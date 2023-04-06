@@ -34,13 +34,13 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation, showAddNo
                 onNoteFormSubmit(newNote);
                 handleResourceCreation(newNote);
                 setNoteFormData({});
+                setShowAddNote(!showAddNote)
                 // history.push(`/folders/${folderId}/notes`);
               });
             } else {
               r.json().then((err) => setErrors(err?.errors));
             }
           });
-          setShowAddNote(!showAddNote)
     }
 
     function handleResourceCreation(newNote) {

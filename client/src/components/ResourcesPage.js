@@ -14,6 +14,7 @@ import Loading from "./Loading";
 import NewLinkForm from "./NewLinkForm";
 import NewNoteForm from "./NewNoteForm";
 import NewSnippetForm from "./NewSnippetForm";
+import ErrorMsg from "./ErrorMsg";
 
 function ResourcesPage({}) {
   const location = useLocation();
@@ -33,6 +34,7 @@ function ResourcesPage({}) {
   const [showAddLink, setShowAddLink] = useState(false);
   const [showAddNote, setShowAddNote] = useState(false);
   const [showAddSnippet, setShowAddSnippet] = useState(false);
+  // const [errorMsg, setErrorMsg] = useState([]);
   // let folderId = folderContent.id
   // console.log(folderId)
 
@@ -46,6 +48,11 @@ function ResourcesPage({}) {
   }, [location, starFilterOn]);
 
   // console.log(folderContent);
+
+  // function resErrorMsg(err) {
+  //   setErrorMsg(err)
+  //   // console.log(err)
+  // }
 
   function onLinkFormSubmit(newLink) {
     setFolderContent({
@@ -240,7 +247,10 @@ function ResourcesPage({}) {
                       onLinkFormSubmit={onLinkFormSubmit}
                       showAddLink={showAddLink}
                       setShowAddLink={setShowAddLink}
+                      // resErrorMsg={resErrorMsg}
+                      // errorMsg={errorMsg}
                     />
+                    {/* <ErrorMsg errors={errorMsg}/> */}
                   </div>
                 )}
                 {showAddNote && (
