@@ -101,14 +101,14 @@ function NewNoteForm({ onNoteFormSubmit, folderId, onResourceCreation, showAddNo
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Add a Tag (up to 1):</span>
+                      <span className="label-text">Add a Tag:</span>
                     </label>
                     <input
                       name="tag_name"
                       value={noteFormData.tag_name}
                       onChange={handleFormChange}
                       type="text"
-                      placeholder="No spaces (i.e. #StackOverflow)"
+                      placeholder="Must start w/ #, no spaces (i.e. #MDN)"
                       className="input input-bordered input-primary w-full max-w-xs"
                     />
                   </div>
