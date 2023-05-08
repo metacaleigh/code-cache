@@ -216,24 +216,22 @@ function ResourcesPage({}) {
         {folderContent?.resources?.length === 0 ? (
           <div>
             <div className="tooltip tooltip-right" data-tip="Back to Folders">
-            <button
-              className="btn btn-circle btn-primary ml-2 mt-2"
-              onClick={goHome}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#292a37"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 12H6M12 5l-7 7 7 7" />
-              </svg>
-            </button>
+            <button className="btn btn-circle bg-primary mx-5 my-5" onClick={goHome}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#292a37"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" />
+          <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
+        </svg>
+      </button>
             </div>
             <div className="hero min-h-screen bg-base-100">
               <div className="hero-content text-center">
