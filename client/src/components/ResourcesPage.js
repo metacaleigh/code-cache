@@ -215,6 +215,7 @@ function ResourcesPage({}) {
       <>
         {folderContent?.resources?.length === 0 ? (
           <div>
+            <div className="tooltip tooltip-right" data-tip="Back to Folders">
             <button
               className="btn btn-circle btn-primary ml-2 mt-2"
               onClick={goHome}
@@ -233,6 +234,7 @@ function ResourcesPage({}) {
                 <path d="M19 12H6M12 5l-7 7 7 7" />
               </svg>
             </button>
+            </div>
             <div className="hero min-h-screen bg-base-100">
               <div className="hero-content text-center">
                 <div className="max-w-md">
