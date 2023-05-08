@@ -85,7 +85,7 @@ function ResourcesPage({}) {
     });
 
     if (newResource.resourceable_type === "Link") {
-     return history.push(`/folders/${id}/links`);
+      return history.push(`/folders/${id}/links`);
     } else if (newResource.resourceable_type === "Snippet") {
       return history.push(`/folders/${id}/snippets`);
     } else if (newResource.resourceable_type === "Note") {
@@ -151,7 +151,7 @@ function ResourcesPage({}) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({...editedSnippet, language: lang}),
+      body: JSON.stringify({ ...editedSnippet, language: lang }),
     })
       .then((r) => r.json())
       .then((newSnippet) => {
@@ -204,77 +204,102 @@ function ResourcesPage({}) {
   }
   // console.log("!!!", folderContent?.resources?.length)
 
+  function goHome() {
+    history.push(`/`);
+  }
+
   if (!folderContent) {
     return <Loading />;
   } else {
     return (
       <>
         {folderContent?.resources?.length === 0 ? (
-          <div className="hero min-h-screen bg-base-100">
-            <div className="hero-content text-center">
-              <div className="max-w-md">
-                {showAddLink || showAddNote || showAddSnippet === true
-                ? null : (
-                  <div>
-                    <h1 className="text-5xl font-bold py-6">
-                      Hmm, it looks a little empty in here...
-                    </h1>
-                    <button
-                      onClick={() => setShowAddLink(!showAddLink)}
-                      className="btn btn-primary mx-1"
-                    >
-                      Add a Link
-                    </button>
-                    <button
-                      onClick={() => setShowAddSnippet(!showAddSnippet)}
-                      className="btn btn-secondary mx-1"
-                    >
-                      Add a Code Snippet
-                    </button>
-                    <button
-                      onClick={() => setShowAddNote(!showAddNote)}
-                      className="btn btn-accent mx-1"
-                    >
-                      Add a Note
-                    </button>
-                  </div>
-                )}
-                {showAddLink && (
-                  <div>
-                    <NewLinkForm
-                      folderId={id}
-                      onResourceCreation={onResourceCreation}
-                      onLinkFormSubmit={onLinkFormSubmit}
-                      showAddLink={showAddLink}
-                      setShowAddLink={setShowAddLink}
-                      // resErrorMsg={resErrorMsg}
-                      // errorMsg={errorMsg}
-                    />
-                    {/* <ErrorMsg errors={errorMsg}/> */}
-                  </div>
-                )}
-                {showAddNote && (
-                  <div>
-                    <NewNoteForm
-                      folderId={id}
-                      onResourceCreation={onResourceCreation}
-                      onNoteFormSubmit={onNoteFormSubmit}
-                      showAddNote={showAddNote}
-                      setShowAddNote={setShowAddNote}
-                    />
-                  </div>
-                )}
-                {showAddSnippet && (
-                  <div>
-                    <NewSnippetForm
-                      folderId={id}
-                      onResourceCreation={onResourceCreation}
-                      onSnippetFormSubmit={onSnippetFormSubmit}
-                      showAddSnippet={showAddSnippet}
-                      setShowAddSnippet={setShowAddSnippet}
-                    />
-                  </div>
-                )}
+          <div>
+            <button
+              className="btn btn-circle btn-primary ml-2 mt-2"
+              onClick={goHome}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#292a37"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M19 12H6M12 5l-7 7 7 7" />
+              </svg>
+            </button>
+            <div className="hero min-h-screen bg-base-100">
+              <div className="hero-content text-center">
+                <div className="max-w-md">
+                  {showAddLink ||
+                  showAddNote ||
+                  showAddSnippet === true ? null : (
+                    <div>
+                      <h1 className="text-5xl font-bold py-6">
+                        Hmm, it looks a little empty in here...
+                      </h1>
+                      <button
+                        onClick={() => setShowAddLink(!showAddLink)}
+                        className="btn btn-primary mx-1"
+                      >
+                        Add a Link
+                      </button>
+                      <button
+                        onClick={() => setShowAddSnippet(!showAddSnippet)}
+                        className="btn btn-secondary mx-1"
+                      >
+                        Add a Code Snippet
+                      </button>
+                      <button
+                        onClick={() => setShowAddNote(!showAddNote)}
+                        className="btn btn-accent mx-1"
+                      >
+                        Add a Note
+                      </button>
+                    </div>
+                  )}
+                  {showAddLink && (
+                    <div>
+                      <NewLinkForm
+                        folderId={id}
+                        onResourceCreation={onResourceCreation}
+                        onLinkFormSubmit={onLinkFormSubmit}
+                        showAddLink={showAddLink}
+                        setShowAddLink={setShowAddLink}
+                        // resErrorMsg={resErrorMsg}
+                        // errorMsg={errorMsg}
+                      />
+                      {/* <ErrorMsg errors={errorMsg}/> */}
+                    </div>
+                  )}
+                  {showAddNote && (
+                    <div>
+                      <NewNoteForm
+                        folderId={id}
+                        onResourceCreation={onResourceCreation}
+                        onNoteFormSubmit={onNoteFormSubmit}
+                        showAddNote={showAddNote}
+                        setShowAddNote={setShowAddNote}
+                      />
+                    </div>
+                  )}
+                  {showAddSnippet && (
+                    <div>
+                      <NewSnippetForm
+                        folderId={id}
+                        onResourceCreation={onResourceCreation}
+                        onSnippetFormSubmit={onSnippetFormSubmit}
+                        showAddSnippet={showAddSnippet}
+                        setShowAddSnippet={setShowAddSnippet}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
